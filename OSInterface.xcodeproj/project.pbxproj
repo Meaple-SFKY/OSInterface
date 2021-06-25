@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		96C46136267AFE1C00E02A9A /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 96C46135267AFE1C00E02A9A /* main.c */; };
+		96147D0A2685797E00FBA873 /* method.c in Sources */ = {isa = PBXBuildFile; fileRef = 96147D092685797E00FBA873 /* method.c */; };
+		96D52C12268381AC00481260 /* file_in.c in Sources */ = {isa = PBXBuildFile; fileRef = 96D52C11268381AC00481260 /* file_in.c */; };
+		96D52C132683843B00481260 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 96C46135267AFE1C00E02A9A /* main.c */; };
+		96FC99462684C00A0063FF77 /* element.c in Sources */ = {isa = PBXBuildFile; fileRef = 96FC99452684C00A0063FF77 /* element.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +26,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		96147D082685797E00FBA873 /* method.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = method.h; sourceTree = "<group>"; };
+		96147D092685797E00FBA873 /* method.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = method.c; sourceTree = "<group>"; };
+		962F003D2685F23E0020843F /* test */ = {isa = PBXFileReference; lastKnownFileType = text; path = test; sourceTree = "<group>"; };
 		96C46132267AFE1C00E02A9A /* OSInterface */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OSInterface; sourceTree = BUILT_PRODUCTS_DIR; };
 		96C46135267AFE1C00E02A9A /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		96D52C10268381AC00481260 /* file_in.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = file_in.h; sourceTree = "<group>"; };
+		96D52C11268381AC00481260 /* file_in.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = file_in.c; sourceTree = "<group>"; };
+		96D52C14268389BF00481260 /* new.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = new.bat; sourceTree = "<group>"; };
+		96D63ED6268447D000DEC695 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		96FC99442684C00A0063FF77 /* element.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = element.h; sourceTree = "<group>"; };
+		96FC99452684C00A0063FF77 /* element.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = element.c; sourceTree = "<group>"; usesTabs = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +69,16 @@
 		96C46134267AFE1C00E02A9A /* OSInterface */ = {
 			isa = PBXGroup;
 			children = (
+				96FC99452684C00A0063FF77 /* element.c */,
+				96FC99442684C00A0063FF77 /* element.h */,
+				96D52C11268381AC00481260 /* file_in.c */,
+				96D52C10268381AC00481260 /* file_in.h */,
 				96C46135267AFE1C00E02A9A /* main.c */,
+				96147D092685797E00FBA873 /* method.c */,
+				96147D082685797E00FBA873 /* method.h */,
+				96D52C14268389BF00481260 /* new.bat */,
+				96D63ED6268447D000DEC695 /* README.md */,
+				962F003D2685F23E0020843F /* test */,
 			);
 			path = OSInterface;
 			sourceTree = "<group>";
@@ -118,7 +139,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96C46136267AFE1C00E02A9A /* main.c in Sources */,
+				96FC99462684C00A0063FF77 /* element.c in Sources */,
+				96D52C132683843B00481260 /* main.c in Sources */,
+				96147D0A2685797E00FBA873 /* method.c in Sources */,
+				96D52C12268381AC00481260 /* file_in.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
