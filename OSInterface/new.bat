@@ -1,12 +1,12 @@
 echo print
 set \a var = 1
 set \p var2 = asdf
-set
+:set
 for %%i in (a,b,c) do echo %%i
 echo %var2%
-echo %1
+:echo %1
 shift
-echo %1
+    echo %1
 if defined str (echo 变量str已经被赋值，其值为%str%) else (echo 变量str的值为空)
 if defined var (echo 变量var已经被赋值，其值为%var%) else (echo 变量var的值为空)
 if 1 equ 2 (echo 1=2) else (echo 1!=2)

@@ -11,6 +11,6 @@
 #include <stdio.h>
 #include "method.h"
 
-int fileIn(int, char **);
+char **fileIn(int, char **, char **);
 
 #endif /* file_in_h */

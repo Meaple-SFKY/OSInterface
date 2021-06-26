@@ -33,7 +33,7 @@
 		96C46135267AFE1C00E02A9A /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		96D52C10268381AC00481260 /* file_in.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = file_in.h; sourceTree = "<group>"; };
 		96D52C11268381AC00481260 /* file_in.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = file_in.c; sourceTree = "<group>"; };
-		96D52C14268389BF00481260 /* new.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = new.bat; sourceTree = "<group>"; };
+		96D52C14268389BF00481260 /* new.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = new.bat; sourceTree = "<group>"; usesTabs = 0; };
 		96D63ED6268447D000DEC695 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		96FC99442684C00A0063FF77 /* element.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = element.h; sourceTree = "<group>"; };
 		96FC99452684C00A0063FF77 /* element.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = element.c; sourceTree = "<group>"; usesTabs = 0; };
