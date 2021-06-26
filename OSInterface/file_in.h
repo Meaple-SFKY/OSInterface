@@ -11,6 +11,6 @@
 #include <stdio.h>
 #include "method.h"
 
-char **fileIn(int, char **, char **);
+char ***fileToPage(int, char **, char ***);
 
 #endif /* file_in_h */

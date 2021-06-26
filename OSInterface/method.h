@@ -24,6 +24,7 @@ typedef struct labelNode {
     char *label;
 } labelNode;
 
+int showPage(char ***);
 bool strCmp(char *, char *);
 bool ifIsSpace(char);
 bool ifIsEnd(char);
@@ -41,8 +42,7 @@ bool ifIsLSS(char *);
 bool ifIsLEQ(char *);
 bool ifIsGTR(char *);
 bool ifIsGEQ(char *);
+char **strToTwoDem(char *);
 short getStrLen(char *);
-char **oneToTwoDem(char *);
-labelNode *formatLabel(char **);
 
 #endif /* method_h */

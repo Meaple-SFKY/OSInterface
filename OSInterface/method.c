@@ -309,69 +309,83 @@ short getStrLen(char *sentence) {
     return len;
 }
 
-char *getLabel(char *sentence) {
-    char *label = NULL;
-    
-    // TODO
-    if (ifIsColon(*sentence)) {
-        for (short i = 0; ifIsEnd(*sentence) == false; i++) {
-            if (ifIsSpace(*(sentence + i))) {
-                label = (char *)malloc(i * sizeof(char));
-                for (short j = 1; j < i; j++) {
-                    *(label + j - 1) = *(sentence + j);
-                }
-                *(label + i - 1) = (char)10;
-                break;
-            }
-        }
-    }
-    
-    return label;
-}
-
-labelNode *formatLabel(char **page) {
-    labelNode *labelInfo = NULL;
-    
-    // TODO
-    short loca = 0;
+char **strToTwoDem(char *sentence) {
+    char **matrix = NULL;
+    short *tempMat = NULL;
+    short count = 0;
     short temp = 0;
-    char *str = NULL;
+    short start = 0;
+    short len = getStrLen(sentence);
     
-    for (short i = 0; i < pageLength; i++) {
-        if(ifIsColon(*(*(page + i))) == true) {
-            str = getLabel(*(page + i));
-            if (str != NULL) {
-                loca = i;
+    // TODO
+    if (sentence != NULL) {
+        if (ifIsSpace(*sentence)) {
+            for (start = 0; start < len; start++) {
+                if (ifIsSpace(*(sentence + start)) && (!ifIsSpace(*(sentence + start + 1)))) {
+                    start++;
+                    break;
+                }
             }
         }
-    }
-    
-    labelInfo = (labelNode *)malloc(loca * sizeof(labelNode));
-    
-    for (short i = 0; i < pageLength; i++) {
-        if(ifIsColon(*(*(page + i))) == true) {
-            str = getLabel(*(page + i));
-            short len = getStrLen(str);
-            if (str != NULL) {
-                (*(labelInfo + temp)).locat = i;
-                (*(labelInfo + temp)).label = (char *)malloc(len * sizeof(char));
-                for (short j = 0; j < len; j++) {
-                    *((*(labelInfo + temp)).label + j) = *(str + j);
-                }
+        
+        for (short i = 0; i < len - 1; i++) {
+            if (ifIsSpace(*(sentence + i + 1)) && (!ifIsSpace(*(sentence + i)))) {
+                count++;
+            }
+        }
+        count++;
+        
+        matrix = (char **)malloc((count + 1) * sizeof(char *));
+        tempMat = (short *)malloc(count * sizeof(short));
+        
+        *(matrix + count) = (char *)malloc(sizeof(char));
+        *(*(matrix + count)) = (char)10;
+        *(tempMat + count - 1) = len - 2;
+        
+        for (short i = 0; i < len - 1; i++) {
+            if (ifIsSpace(*(sentence + i + 1)) && (!ifIsSpace(*(sentence + i)))) {
+                *(tempMat + temp) = i;
                 temp++;
             }
         }
-    }
+        temp++;
         
-    labelCount = temp;
+        *matrix = (char *)malloc((*tempMat + 2 - start) * sizeof(char));
+        
+        for (short i = 0; i < *tempMat + 1 - start; i++) {
+            *(*matrix + i) = *(sentence + i + start);
+        }
+        *(*matrix + *tempMat - start + 1) = (char)10;
+        
+        if (temp > 1) {
+            for (short i = 0; i < temp - 1; i++) {
+                for (short j = *(tempMat + i); j < *(tempMat + i + 1); j++) {
+                    if (ifIsSpace(*(sentence + j)) && (!ifIsSpace(*(sentence + j + 1)))) {
+                        short newLen = *(tempMat + i + 1) - j;
+                        *(matrix + i + 1) = (char *)malloc((newLen + 1) * sizeof(char));
+                        for (short p = 0; p < newLen; p++) {
+                            *(*(matrix + i + 1) + p) = *(sentence + p + j + 1);
+                        }
+                        *(*(matrix + i + 1) + newLen) = (char)10;
+                    }
+                }
+            }
+        }
+    }
     
-    return labelInfo;
+    return matrix;
 }
 
-char **oneToTwoDem(char *str) {
-    char **twoDem = NULL;
+int showPage(char ***page) {
+    if (page == NULL) {
+        return 1;
+    }
     
-    // TODO
+    for (short i = 0; i < pageLength; i++) {
+        for (short j = 0; *(*(*(page + i) + j)) != (char)10; j++) {
+            printf("%s", *(*(page + i) + j));
+        }
+    }
     
-    return twoDem;
+    return 0;
 }

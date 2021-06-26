@@ -9,12 +9,17 @@
 
 short pageLength;
 
-char **fileIn(int argc, char *argv[], char **page) {
+char ***fileToPage(int argc, char *argv[], char ***page) {
     
+    // TODO
     FILE *fp = NULL;
-    char getsStr[N + 1];
+    char buffer[N + 1];
     page = NULL;
-    short count = 0;
+    short length = 0;
+    
+    for (short i = 0; i < N + 1; i++) {
+        buffer[i] = (char)10;
+    }
     
     if(argc != 2) {
         printf("Error format,Usage: display filename1\n");
@@ -26,33 +31,20 @@ char **fileIn(int argc, char *argv[], char **page) {
         return NULL;
     }
     
-    while (fgets(getsStr, N, fp) != NULL) {
-        count++;
+    while (fgets(buffer, N, fp) != NULL) {
+        length++;
     }
-    count++;
     
-    page = (char **)malloc(count * sizeof(char *));
+    pageLength = length;
+    
+    page = (char ***)malloc(length * sizeof(char **));
     
     fseek(fp, 0, SEEK_SET);
     
-    for (short temp = 0; fgets(getsStr, N, fp) != NULL; temp++) {
-        
-        short len = getStrLen(getsStr);
-        
-        *(page + temp) = (char *)malloc(len * sizeof(char));
-        
-        for (short i = 0; i < len - 1; i++) {
-            *(*(page + temp) + i) = getsStr[i];
-        }
-        
-        *(*(page + temp) + len - 1) = (char)10;
+    for (short i = 0; fgets(buffer, N, fp) != NULL; i++) {
+        *(page + i) = strToTwoDem(buffer);
     }
     
-    pageLength = count;
-    
-    *(page + count - 1) = (char *)malloc(sizeof(char));
-    *(*(page + count - 1)) = (char)10;
-        
     fclose(fp);
     
     return page;
