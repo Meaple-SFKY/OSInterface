@@ -52,7 +52,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Users/sfky/Documents/Project/OSInterface/OSInterface/new.bat"
+            argument = "/Users/sfky/Documents/Project/OSInterface/OSInterface/test"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

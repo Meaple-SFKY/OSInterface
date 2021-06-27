@@ -18,18 +18,30 @@
 const static short N = 255;
 extern short pageLength;
 extern short labelCount;
+extern short varCount;
 
 typedef struct labelNode {
     short locat;
     char *label;
 } labelNode;
 
+typedef struct varNode {
+    short rowIndex;
+    short colIndex;
+    char *label;
+    char *value;
+} varNode;
+
+int showStr(char *);
 int showPage(char ***);
+int showLabel(labelNode *);
+int showVar(varNode *);
 bool strCmp(char *, char *);
 bool ifIsSpace(char);
 bool ifIsEnd(char);
 bool ifIsColon(char);
 bool ifIsAt(char);
+bool ifIsMod(char);
 bool ifIsEcho(char *);
 bool ifIsFor(char *);
 bool ifIsGoto(char *);
@@ -42,7 +54,19 @@ bool ifIsLSS(char *);
 bool ifIsLEQ(char *);
 bool ifIsGTR(char *);
 bool ifIsGEQ(char *);
+bool echoFile(char *, char *, bool);
+char *getValue(char *, varNode *);
+char *getStr(char *);
+char *getFollow(char **, short);
+char *getSubStr(char **, short, short);
+char *getEchoPath(char **, short, short);
+char *getEchoValue(char **, short, short, short);
 char **strToTwoDem(char *);
+short ifHavEqo(char *);
 short getStrLen(char *);
+short getVarCou(char **, short);
+short *ifHavAnb(char **, short);
+labelNode *labelInfo(char ***);
+varNode *varInfo(char ***);
 
 #endif /* method_h */

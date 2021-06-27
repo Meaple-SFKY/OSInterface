@@ -7,17 +7,21 @@
 
 #include "file_in.h"
 #include "method.h"
+#include "process.h"
 
 int main(int argc, char * argv[]) {
     
     // insert code here...
-    
-    // File To Array
     char ***page = NULL;
     page = fileToPage(argc, argv, page);
-    showPage(page);
     
-//    printf("%s", **page);
+    labelNode *label = labelInfo(page);
+    varNode *var = varInfo(page);
+    process(page, label, var);
+    
+//    showPage(page);
+//    showLabel(label);
+//    showVar(var);
     
     return 0;
 }

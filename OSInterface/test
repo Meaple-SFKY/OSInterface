@@ -1,2 +1,7 @@
-hello isss
-echo print
+echo hello isss
+echo %print% > sadfg
+set asada=10
+set saaafff=10
+set asada=9
+set asada=9
+set asada=9
