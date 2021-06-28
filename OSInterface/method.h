@@ -28,6 +28,7 @@ typedef struct labelNode {
 typedef struct varNode {
     short rowIndex;
     short colIndex;
+    short varType;
     char *label;
     char *value;
 } varNode;
@@ -61,9 +62,12 @@ char *getFollow(char **, short);
 char *getSubStr(char **, short, short);
 char *getEchoPath(char **, short, short);
 char *getEchoValue(char **, short, short, short);
+char **getBraStr(char **, short, short);
 char **strToTwoDem(char *);
 short ifHavEqo(char *);
+short ifIsSla(char *);
 short getStrLen(char *);
+short getDouStrLen(char **);
 short getVarCou(char **, short);
 short *ifHavAnb(char **, short);
 labelNode *labelInfo(char ***);

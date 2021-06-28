@@ -11,12 +11,12 @@
 #include <stdio.h>
 #include "method.h"
 
-short processEcho(char **, short, varNode*);
-short processGoto(char **, short, varNode*);
-short processSet(char **, short, varNode*);
+bool processEcho(char **, short, varNode*);
+bool processSet(char **, short, varNode*);
+short processGoto(char **, short, labelNode*);
 short processFor(char **, short, varNode*);
 short processIf(char **, short, varNode*);
 short processShift(char **, short, varNode*);
-int process(char ***, labelNode *, varNode*);
+int process(char ***, labelNode *, varNode*, short);
 
 #endif /* process_h */

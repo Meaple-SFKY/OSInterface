@@ -45,6 +45,8 @@ char ***fileToPage(int argc, char *argv[], char ***page) {
         *(page + i) = strToTwoDem(buffer);
     }
     
+    
+    
     fclose(fp);
     
     return page;

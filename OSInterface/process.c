@@ -7,41 +7,48 @@
 
 #include "process.h"
 
-int process(char ***page, labelNode *label, varNode *var) {
+int process(char ***page, labelNode *label, varNode *var, short rowPos) {
     
     // TODO
-    for (short i = 0; i < pageLength; i++) {
-        if (ifIsEcho(*(*(page + i)))) {
+    for (short i = rowPos; i < pageLength; i++) {
+        char *str = *(*(page + i));
+        
+        if (ifIsEcho(str)) {
+            printf("echo : ----\n");
             
             // TODO
             processEcho(*(page + i), 1, var);
             
-        } else if (ifIsGoto(*(*(page + i)))) {
+        } else if (ifIsGoto(str)) {
+            printf("goto : ----\n");
+            
+            // TODO
+            short p = processGoto(*(page + i), 1, label);
+            i = p - 1;
+            
+        } else if (ifIsSet(str)) {
+            printf("set : ----\n");
             
             // TODO
             
-        } else if (ifIsSet(*(*(page + i)))) {
+        } else if (ifIsFor(str)) {
+            printf("for : ----\n");
             
             // TODO
             
-        } else if (ifIsFor(*(*(page + i)))) {
+        } else if (ifIsIf(str)) {
+            printf("if : ----\n");
             
             // TODO
             
-        } else if (ifIsIf(*(*(page + i)))) {
-            
-            // TODO
-            
-        } else if (ifIsShift(*(*(page + i)))) {
-            
-            // TODO
-            
-        } else if (ifIsEnd(*(*(*page + i)))) {
+        } else if (ifIsShift(str)) {
+            printf("shift : ----\n");
             
             // TODO
             
         } else {
-            
+            printf("else : ----\n");
+            showStr(str);
             // TODO
             
         }
@@ -50,29 +57,41 @@ int process(char ***page, labelNode *label, varNode *var) {
     return 0;
 }
 
-short processEcho(char **word, short pos, varNode *var) {
-    short posi = 0;
+bool processEcho(char **word, short pos, varNode *var) {
+    bool suc = true;
     
     // TODO
     if((word != NULL) && (!ifIsEnd(*(*(word + pos))))) {
         short *anbInfo = ifHavAnb(word, pos);
+        char **echoStr = NULL;
+        short douLen = getDouStrLen(word);
+        echoStr = (char **)malloc(douLen * sizeof(char *));
         
-        if (ifIsMod(*(*(word + pos)))) {
+        for (short i = 0; i < douLen; i++) {
+            short len = getStrLen(*(word + i));
+            *(echoStr + i) = (char *)malloc(len * sizeof(char));
+            
+            for (short j = 0; j < len; j++) {
+                *(*(echoStr + i) + j) = *(*(word + i) + j);
+            }
+        }
+        
+        if (ifIsMod(*(*(echoStr + pos)))) {
             short anaMod = 0;
             
-            for (short i = 1; !ifIsEnd(*(*(word + pos) + i)); i++) {
-                if (ifIsMod(*(*(word + pos)+ i))) {
+            for (short i = 1; !ifIsEnd(*(*(echoStr + pos) + i)); i++) {
+                if (ifIsMod(*(*(echoStr + pos)+ i))) {
                     anaMod = i;
                 }
             }
             
             if ((anaMod == 0) || (anaMod == 1)) {
-                posi = -1;
+                suc = false;
             } else {
                 char *value = (char *)malloc(anaMod * sizeof(char));
                 
                 for (short j = 1; j < anaMod; j++) {
-                    *(value + j - 1) = *(*(word + pos) + j);
+                    *(value + j - 1) = *(*(echoStr + pos) + j);
                 }
                 
                 *(value + anaMod) = (char)10;
@@ -82,15 +101,15 @@ short processEcho(char **word, short pos, varNode *var) {
                     
                     // TODO
                     short varLen = getStrLen(value);
-                    *(word + pos) = (char *)realloc(*(word + pos), varLen * sizeof(char));
+                    *(echoStr + pos) = (char *)realloc(*(echoStr + pos), varLen * sizeof(char));
                     for (short i = 0; i < varLen; i++) {
-                        *(*(word + pos) + i) = *(value + i);
+                        *(*(echoStr + pos) + i) = *(value + i);
                     }
                 }
             }
         }
         if (anbInfo != NULL) {
-            if (*anbInfo == 0 || *anbInfo == 2) {
+            if ((*anbInfo == 0) || (*anbInfo == 2)) {
                 
                 // TODO
                 bool mode = false;
@@ -100,8 +119,8 @@ short processEcho(char **word, short pos, varNode *var) {
                 
                 short pathPos = *anbInfo;
                 short pathInfo = *(anbInfo + 1);
-                char *path = getEchoPath(word, pathPos, pathInfo);
-                char *value = getEchoValue(word, pos, pathPos, pathInfo);
+                char *path = getEchoPath(echoStr, pathPos, pathInfo);
+                char *value = getEchoValue(echoStr, pos, pathPos, pathInfo);
                 
                 if (path != NULL) {
 //                    printf("%s\n", path);
@@ -109,14 +128,43 @@ short processEcho(char **word, short pos, varNode *var) {
                     
                     if (!echoFile(path, value, mode)) {
                         printf("Echo File Error!\n");
+                        suc = false;
                     }
+                } else {
+                    suc = false;
                 }
-                
             } else {
-                printf("Nor: %s", getFollow(word, pos));
+                printf("Log: %s", getFollow(echoStr, pos));
             }
         }
     }
     
-    return posi;
+    return suc;
+}
+
+short processGoto(char **word, short pos, labelNode *label) {
+    short gotoPos = pos + 1;
+    
+    // TODO
+    if (word != NULL) {
+        for (short i = 0; i < labelCount; i++) {
+            if(strCmp(*(word + pos), (*(label)).label)) {
+                gotoPos = (*(label)).locat + 1;
+                break;
+            }
+        }
+    }
+    
+    return gotoPos;
+}
+
+bool processSet(char **word, short pos, varNode *var) {
+    bool suc = true;
+    
+    // TODO
+    if (word != NULL) {
+        
+    }
+    
+    return suc;
 }

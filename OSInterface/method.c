@@ -68,6 +68,17 @@ bool ifIsAt(char ch) {
     return ifAt;
 }
 
+bool ifIsComma(char ch) {
+    bool ifComma = false;
+    
+    // TODO
+    if (ch == (char)44) {
+        ifComma = true;
+    }
+    
+    return ifComma;
+}
+
 bool ifIsMod(char ch) {
     bool ifMod = false;
     
@@ -89,6 +100,18 @@ bool ifIsColon(char ch) {
     
     return ifColon;
 }
+short ifIsBrack(char ch) {
+    short ifBrack = -1;
+    
+    // TODO
+    if (ch == (char)40) {
+        ifBrack = 0;
+    } else if (ch == (char)41) {
+        ifBrack = 1;
+    }
+    
+    return ifBrack;
+}
 
 bool ifIsEqo(char ch) {
     bool ifEqo = false;
@@ -103,16 +126,17 @@ bool ifIsEqo(char ch) {
 
 bool ifIsEcho(char *str) {
     bool ifEcho = false;
-    char *strEcho = (char *)malloc(5 * sizeof(char));
-    *strEcho = 'e';
-    *(strEcho + 1) = 'c';
-    *(strEcho + 2) = 'h';
-    *(strEcho + 3) = 'o';
-    *(strEcho + 4) = (char)10;
     
     // TODO
     if (str != NULL) {
-        if (strCmp(strEcho, str) == true) {
+        char *strEcho = (char *)malloc(5 * sizeof(char));
+        *strEcho = 'e';
+        *(strEcho + 1) = 'c';
+        *(strEcho + 2) = 'h';
+        *(strEcho + 3) = 'o';
+        *(strEcho + 4) = (char)10;
+        
+        if (strCmp(strEcho, str)) {
             ifEcho = true;
         }
     }
@@ -122,15 +146,16 @@ bool ifIsEcho(char *str) {
 
 bool ifIsFor(char *str) {
     bool ifFor = false;
-    char *strFor = (char *)malloc(4 * sizeof(char));
-    *strFor = 'f';
-    *(strFor + 1) = 'o';
-    *(strFor + 2) = 'r';
-    *(strFor + 3) = (char)10;
     
     // TODO
     if (str != NULL) {
-        if (strCmp(strFor, str) == true) {
+        char *strFor = (char *)malloc(4 * sizeof(char));
+        *strFor = 'f';
+        *(strFor + 1) = 'o';
+        *(strFor + 2) = 'r';
+        *(strFor + 3) = (char)10;
+        
+        if (strCmp(strFor, str)) {
             ifFor = true;
         }
     }
@@ -140,15 +165,16 @@ bool ifIsFor(char *str) {
 
 bool ifIsGoto(char *str) {
     bool ifGoto = false;
-    char *strGoto = (char *)malloc(5 * sizeof(char));
-    *strGoto = 'g';
-    *(strGoto + 1) = 'o';
-    *(strGoto + 2) = 't';
-    *(strGoto + 3) = 'o';
-    *(strGoto + 4) = (char)10;
     
     // TODO
     if (str != NULL) {
+        char *strGoto = (char *)malloc(5 * sizeof(char));
+        *strGoto = 'g';
+        *(strGoto + 1) = 'o';
+        *(strGoto + 2) = 't';
+        *(strGoto + 3) = 'o';
+        *(strGoto + 4) = (char)10;
+        
         if (strCmp(strGoto, str) == true) {
             ifGoto = true;
         }
@@ -159,13 +185,14 @@ bool ifIsGoto(char *str) {
 
 bool ifIsIf(char *str) {
     bool ifIf = false;
-    char *strIf = (char *)malloc(3 * sizeof(char));
-    *strIf = 'i';
-    *(strIf + 1) = 'f';
-    *(strIf + 2) = (char)10;
     
     // TODO
     if (str != NULL) {
+        char *strIf = (char *)malloc(3 * sizeof(char));
+        *strIf = 'i';
+        *(strIf + 1) = 'f';
+        *(strIf + 2) = (char)10;
+        
         if (strCmp(strIf, str) == true) {
             ifIf = true;
         }
@@ -176,14 +203,15 @@ bool ifIsIf(char *str) {
 
 bool ifIsSet(char *str) {
     bool ifSet = false;
-    char *strSet = (char *)malloc(4 * sizeof(char));
-    *strSet = 's';
-    *(strSet + 1) = 'e';
-    *(strSet + 2) = 't';
-    *(strSet + 3) = (char)10;
     
     // TODO
     if (str != NULL) {
+        char *strSet = (char *)malloc(4 * sizeof(char));
+        *strSet = 's';
+        *(strSet + 1) = 'e';
+        *(strSet + 2) = 't';
+        *(strSet + 3) = (char)10;
+        
         if (strCmp(strSet, str) == true) {
             ifSet = true;
         }
@@ -194,16 +222,17 @@ bool ifIsSet(char *str) {
 
 bool ifIsShift(char *str) {
     bool ifShift = false;
-    char *strShift = (char *)malloc(6 * sizeof(char));
-    *strShift = 's';
-    *(strShift + 1) = 'h';
-    *(strShift + 2) = 'i';
-    *(strShift + 3) = 'f';
-    *(strShift + 4) = 't';
-    *(strShift + 5) = (char)10;
     
     // TODO
     if (str != NULL) {
+        char *strShift = (char *)malloc(6 * sizeof(char));
+        *strShift = 's';
+        *(strShift + 1) = 'h';
+        *(strShift + 2) = 'i';
+        *(strShift + 3) = 'f';
+        *(strShift + 4) = 't';
+        *(strShift + 5) = (char)10;
+        
         if (strCmp(strShift, str) == true) {
             ifShift = true;
         }
@@ -353,6 +382,48 @@ bool echoFile(char *path, char *str, bool mode) {
     return ifSuc;
 }
 
+char **getBraStr(char **str, short startPos, short endPos) {
+    char **buffer = NULL;
+    
+    // TODO
+    if (str != NULL) {
+        short len = endPos - startPos + 1;
+        buffer = (char **)malloc((len + 1) * sizeof(char *));
+        *(buffer + len) = (char *)malloc(sizeof(char));
+        *(*(buffer + len)) = (char)10;
+        
+        for (short i = 0; i < len; i++) {
+            short innerLen = getStrLen(*(str + startPos + i));
+            
+            if ((ifIsBrack(*(*(str + startPos + i))) == 0) && (ifIsBrack(*(*(str + startPos + i) + innerLen - 2)) != 1)) {
+                *(buffer + i) = (char *)malloc((innerLen - 1) * sizeof(char));
+                for (short j = 1; j < innerLen; j++) {
+                    *(*(buffer + i) + j - 1) = *(*(str + startPos + i) + j);
+                }
+            } else if ((ifIsBrack(*(*(str + startPos + i))) == 0) && (ifIsBrack(*(*(str + startPos + i) + innerLen - 2)) == 1)) {
+                *(buffer + i) = (char *)malloc((innerLen - 2) * sizeof(char));
+                for (short j = 1; j < innerLen - 2; j++) {
+                    *(*(buffer + i) + j - 1) = *(*(str + startPos + i) + j);
+                }
+                *(*(buffer + i) + innerLen - 3) = (char)10;
+            } else if ((ifIsBrack(*(*(str + startPos + i))) != 0) && (ifIsBrack(*(*(str + startPos + i) + innerLen - 2)) == 1)) {
+                *(buffer + i) = (char *)malloc((innerLen - 1) * sizeof(char));
+                for (short j = 0; j < innerLen - 2; j++) {
+                    *(*(buffer + i) + j) = *(*(str + startPos + i) + j);
+                }
+                *(*(buffer + i) + innerLen - 2) = (char)10;
+            } else {
+                *(buffer + i) = (char *)malloc(innerLen * sizeof(char));
+                for (short j = 0; j < innerLen; j++) {
+                    *(*(buffer + i) + j) = *(*(str + startPos + i) + j);
+                }
+            }
+        }
+    }
+    
+    return buffer;
+}
+
 char *getFollow(char **str, short pos) {
     char *followStr = NULL;
     
@@ -363,23 +434,22 @@ char *getFollow(char **str, short pos) {
         short temp = 0;
         
         for (short i = pos; !ifIsEnd(*(*(str + i))); i++) {
+            countCh += getStrLen(*(str + i)) - 1;
             countStr++;
-            for (short j = 0; !ifIsEnd(*(*(str + i) + j)); j++) {
-                countCh++;
-            }
         }
         
         followStr = (char *)malloc((countCh + countStr) * sizeof(char));
         
         for (short i = pos; !ifIsEnd(*(*(str + i))); i++) {
-            for (short j = 0; !ifIsEnd(*(*(str + i) + j)); j++) {
+            short len = getStrLen(*(str + i));
+            for (short j = 0; j < len - 1; j++) {
                 *(followStr + temp) = *(*(str + i) + j);
                 temp++;
             }
             *(followStr + temp) = (char)32;
             temp++;
         }
-        *(followStr + countCh + countStr) = (char)10;
+        *(followStr + countCh + countStr - 1) = (char)10;
     }
     
     return followStr;
@@ -394,15 +464,14 @@ char *getSubStr(char **str, short startPos, short endPos) {
         short temp = 0;
         
         for (short i = startPos; i < endPos; i++) {
-            for (short j = 0; !ifIsEnd(*(*(str + i) + j)); j++) {
-                countCh++;
-            }
+            countCh += getStrLen(*(str + i)) - 1;
         }
         
         subStr = (char *)malloc((countCh + countStr) * sizeof(char));
         
         for (short i = startPos; i < endPos; i++) {
-            for (short j = 0; !ifIsEnd(*(*(str + i) + j)); j++) {
+            short len = getStrLen(*(str + i));
+            for (short j = 0; j < len - 1; j++) {
                 *(subStr + temp) = *(*(str + i) + j);
                 temp++;
             }
@@ -420,10 +489,7 @@ char *getStr(char *str) {
     
     // TODO
     if (str != NULL) {
-        short len = 0;
-        for (short i = 0; !ifIsEnd(*(str + i)); i++) {
-            len++;
-        }
+        short len = getStrLen(str) - 1;
         
         tempStr = (char *)malloc(len * sizeof(char));
         
@@ -439,10 +505,10 @@ char *getEchoPath(char **str, short anbPos, short info) {
     char *pathStr = NULL;
     
     // TODO
-    if ((info == 0) || (info == 2)) {
-        pathStr = getStr(*(str + anbPos + 1));
-    } else {
-        pathStr = getStr(*(str + anbPos - 1));
+    if (str != NULL) {
+        if ((info == 0) || (info == 2)) {
+            pathStr = getStr(*(str + anbPos + 1));
+        }
     }
     
     return pathStr;
@@ -452,14 +518,10 @@ char *getEchoValue(char **str, short pos, short anbPos, short info) {
     char *echoValue = NULL;
     
     // TODO
-    if ((info == 0) || (info == 2)) {
-        echoValue = getStr(getSubStr(str, pos, anbPos));
-    } else {
-        short temp = 0;
-        for (short i = 0; !ifIsEnd(*(*(str + i))); i++) {
-            temp++;
+    if (str != NULL) {
+        if ((info == 0) || (info == 2)) {
+            echoValue = getStr(getSubStr(str, pos, anbPos));
         }
-        echoValue = getStr(getSubStr(str, anbPos + 1, temp));
     }
     
     return echoValue;
@@ -470,7 +532,8 @@ short ifHavEqo(char *str) {
     
     // TODO
     if (str != NULL) {
-        for (short i = 0; !ifIsEnd(*(str + i)); i++) {
+        short len = getStrLen(str) - 1;
+        for (short i = 0; i < len; i++) {
             if (ifIsEqo(*(str + i))) {
                 ifHav = i;
                 break;
@@ -481,6 +544,23 @@ short ifHavEqo(char *str) {
     return ifHav;
 }
 
+short ifIsSla(char *str) {
+    short ifSla = -1;
+    
+    // TODO
+    if ((str != NULL) && (getStrLen(str) == 3)) {
+        if ((*str == (char)92) && (*(str + 2) == (char)10)) {
+            if (*(str + 1) == 'a') {
+                ifSla = 0;
+            } else if (*(str + 1) == 'p') {
+                ifSla = 1;
+            }
+        }
+    }
+    
+    return ifSla;
+}
+
 short *ifHavAnb(char **str, short pos) {
     short *ifAnb = NULL;
     
@@ -488,36 +568,23 @@ short *ifHavAnb(char **str, short pos) {
     if (str != NULL) {
         ifAnb = (short *)malloc(2 * sizeof(short));
         char *strLefSinAnb = (char *)malloc(2 * sizeof(char));
-        char *strRigSinAnb = (char *)malloc(2 * sizeof(char));
         char *strLefDouAnb = (char *)malloc(3 * sizeof(char));
-        char *strRigDouAnb = (char *)malloc(3 * sizeof(char));
         
         *ifAnb = -1;
         *(ifAnb + 1) = -1;
         *strLefSinAnb = '>';
         *(strLefSinAnb + 1) = (char)10;
-        *strRigSinAnb = '<';
-        *(strRigSinAnb + 1) = (char)10;
         *strLefDouAnb = '>';
         *(strLefDouAnb + 1) = '>';
         *(strLefDouAnb + 2) = (char)10;
-        *strRigDouAnb = '<';
-        *(strRigDouAnb + 1) = '<';
-        *(strRigDouAnb + 2) = (char)10;
         
         for (short i = pos; !ifIsEnd(*(*(str + i))); i++) {
             if (strCmp(strLefSinAnb, *(str + i))) {
                 *ifAnb = i;
                 *(ifAnb + 1) = 0;
-            } else if (strCmp(strRigSinAnb, *(str + i))) {
-                *ifAnb = i;
-                *(ifAnb + 1) = 1;
-            }else if (strCmp(strLefDouAnb, *(str + i))) {
+            } else if (strCmp(strLefDouAnb, *(str + i))) {
                 *ifAnb = i;
                 *(ifAnb + 1) = 2;
-            }else if (strCmp(strRigDouAnb, *(str + i))) {
-                *ifAnb = i;
-                *(ifAnb + 1) = 3;
             }
         }
     }
@@ -539,19 +606,30 @@ short getStrLen(char *sentence) {
     return len;
 }
 
+short getDouStrLen(char **str) {
+    short len = 0;
+    
+    // TODO
+    if (str != NULL) {
+        while (!ifIsEnd(**(str + len))) {
+            len++;
+        }
+        len++;
+    }
+    
+    return len;
+}
+
 short getVarCou(char **str, short count) {
     short value = 0;
     
     // TODO
     if (str != NULL) {
-        
-        char *tempEnd = (char *)malloc(sizeof(char));
         char **tempStr = (char **)malloc(count * sizeof(char *));
-        
-        *tempEnd = (char)10;
-        
+                
         for (short i = 0; i < count; i++) {
-            *(tempStr + i) = tempEnd;
+            *(tempStr + i) = (char *)malloc(sizeof(char));
+            *(*(tempStr + i)) = (char)10;
         }
         
         for (short i = 0; i < count; i++) {
@@ -588,14 +666,15 @@ short getVarCou(char **str, short count) {
 
 char **strToTwoDem(char *sentence) {
     char **matrix = NULL;
-    short *tempMat = NULL;
-    short count = 0;
-    short temp = 0;
-    short start = 0;
-    short len = getStrLen(sentence);
     
     // TODO
-    if (sentence != NULL) {
+    if (sentence != NULL && (!ifIsEnd(*sentence))) {
+        short *tempMat = NULL;
+        short count = 0;
+        short temp = 0;
+        short start = 0;
+        short len = getStrLen(sentence);
+        
         if (ifIsSpace(*sentence)) {
             for (start = 0; start < len; start++) {
                 if (ifIsSpace(*(sentence + start)) && (!ifIsSpace(*(sentence + start + 1)))) {
@@ -680,91 +759,162 @@ labelNode *labelInfo(char ***page) {
         }
     }
     
-    return  label;
+    return label;
 }
 
 varNode *varInfo(char ***page) {
     varNode *var = NULL;
-    char **temVar = NULL;
     
     // TODO
     if (page != NULL) {
+        char **temVar = NULL;
+        
         for (short i = 0; i < pageLength; i++) {
-            for (short j = 0; !ifIsEnd(*(*(*(page + i) + j))); j++) {
-                if (getStrLen((*(*(page + i) + j + 1))) > 3) {
-                    if (ifIsSet(*(*(page + i) + j))) {
+            short douLen = getDouStrLen(*(page + i)) - 1;
+
+            for (short j = 0; j < douLen; j++) {
+                if (ifIsSet(*(*(page + i) + j)) && (j < douLen - 1)) {
+                    short len = getStrLen(*(*(page + i) + j + 1));
+                    if (len > 3) {
                         short index = ifHavEqo(*(*(page + i) + j + 1));
+                        
                         if ((index != -1) && (index != 0)) {
                             varCount++;
+                        }
+                    } else if ((len == 3) && (j < douLen - 2)) {
+                        short index = ifHavEqo(*(*(page + i) + j + 2));
+                        
+                        if ((index != -1) && (index != 0)) {
+                            if (ifIsSla(*(*(page + i) + j + 1)) != -1) {
+                                varCount++;
+                            }
                         }
                     }
                 }
             }
         }
-        
+
         temVar = (char **)malloc(varCount * sizeof(char *));
         short temp = 0;
         
         for (short i = 0; i < pageLength; i++) {
-            for (short j = 0; !ifIsEnd(*(*(*(page + i) + j))); j++) {
-                if (getStrLen((*(*(page + i) + j + 1))) > 3) {
-                    if (ifIsSet(*(*(page + i) + j))) {
+            short douLen = getDouStrLen(*(page + i)) - 1;
+
+            for (short j = 0; j < douLen; j++) {
+                if (ifIsSet(*(*(page + i) + j)) && (j < douLen - 1)) {
+                    short len = getStrLen(*(*(page + i) + j + 1));
+                    if (len > 3) {
                         short index = ifHavEqo(*(*(page + i) + j + 1));
                         
                         if ((index != -1) && (index != 0)) {
                             *(temVar + temp) = (char *)malloc((index + 1) * sizeof(char));
-                            
+
                             for (short p = 0; p < index; p++) {
                                 *(*(temVar + temp) + p) = *(*(*(page + i) + j + 1) + p);
                             }
                             *(*(temVar + temp) + index) = (char)10;
                             temp++;
                         }
+                    } else if ((len == 3) && (j < douLen - 2)) {
+                        short index = ifHavEqo(*(*(page + i) + j + 2));
+                        
+                        if ((index != -1) && (index != 0)) {
+                            if (ifIsSla(*(*(page + i) + j + 1)) != -1) {
+                                *(temVar + temp) = (char *)malloc((index + 1) * sizeof(char));
+
+                                for (short p = 0; p < index; p++) {
+                                    *(*(temVar + temp) + p) = *(*(*(page + i) + j + 2) + p);
+                                }
+                                *(*(temVar + temp) + index) = (char)10;
+                                temp++;
+                            }
+                        }
                     }
                 }
             }
         }
-        
+
         varCount = getVarCou(temVar, varCount);
         free(temVar);
-        
+
         var = (varNode *)malloc(varCount * sizeof(varNode));
         temp = 0;
-                
+        
         for (short i = 0; i < pageLength; i++) {
-            for (short j = 0; !ifIsEnd(*(*(*(page + i) + j))); j++) {
-                if (getStrLen((*(*(page + i) + j + 1))) > 3) {
-                    if (ifIsSet(*(*(page + i) + j))) {
+            short douLen = getDouStrLen(*(page + i)) - 1;
+
+            for (short j = 0; j < douLen; j++) {
+                if (ifIsSet(*(*(page + i) + j)) && (j < douLen - 1)) {
+                    short len = getStrLen(*(*(page + i) + j + 1));
+                    if (len > 3) {
                         bool flag = true;
                         short index = ifHavEqo(*(*(page + i) + j + 1));
                         
                         if ((index != -1) && (index != 0)) {
                             char *tempStr = (char *)malloc((index + 1) * sizeof(char));
-                            
+
                             for (short p = 0; p < index; p++) {
                                 *(tempStr + p) = *(*(*(page + i) + j + 1) + p);
                             }
                             *(tempStr + index) = (char)10;
-                            
+
                             for (short p = 0; p < temp; p++) {
                                 if (strCmp((*(var + p)).label, tempStr)) {
                                     flag = false;
                                     break;
                                 }
                             }
-                            
+
                             if (flag == true) {
                                 short len = getStrLen(*(*(page + i) + j + 1)) - index - 1;
                                 (*(var + temp)).rowIndex = i;
                                 (*(var + temp)).colIndex = j + 1;
+                                (*(var + temp)).varType = 2;
                                 (*(var + temp)).label = (char *)malloc((index + 1) * sizeof(char));
                                 (*(var + temp)).value = (char *)malloc(len + sizeof(char));
-                                
+
                                 for (short p = 0; p < index; p++) {
                                     *((*(var + temp)).label + p) = *(*(*(page + i) + j + 1) + p);
                                 }
                                 *((*(var + temp)).label + index) = (char)10;
                                 temp++;
+                            }
+                        }
+                    } else if ((len == 3) && (j < douLen - 2)) {
+                        bool flag = true;
+                        short index = ifHavEqo(*(*(page + i) + j + 2));
+                        
+                        if ((index != -1) && (index != 0)) {
+                            short tempPa = ifIsSla(*(*(page + i) + j + 1));
+                            if (tempPa != -1) {
+                                char *tempStr = (char *)malloc((index + 1) * sizeof(char));
+
+                                for (short p = 0; p < index; p++) {
+                                    *(tempStr + p) = *(*(*(page + i) + j + 2) + p);
+                                }
+                                *(tempStr + index) = (char)10;
+
+                                for (short p = 0; p < temp; p++) {
+                                    if (strCmp((*(var + p)).label, tempStr)) {
+                                        flag = false;
+                                        break;
+                                    }
+                                }
+
+                                if (flag == true) {
+                                    short len = getStrLen(*(*(page + i) + j + 2)) - index - 1;
+                                    (*(var + temp)).rowIndex = i;
+                                    (*(var + temp)).colIndex = j + 2;
+                                    (*(var + temp)).varType = tempPa;
+                                    (*(var + temp)).label = (char *)malloc((index + 1) * sizeof(char));
+                                    (*(var + temp)).value = (char *)malloc(len + sizeof(char));
+                                    
+                                    for (short p = 0; p < index; p++) {
+                                        *((*(var + temp)).label + p) = *(*(*(page + i) + j + 2) + p);
+                                    }
+                                    *((*(var + temp)).label + index) = (char)10;
+                                    temp++;
+                                }
                             }
                         }
                     }
@@ -791,16 +941,17 @@ char *getValue(char *label, varNode *var) {
 }
 
 int showStr(char *str) {
+    int suc = 0;
     
-    if (str == NULL) {
-        return 1;
+    if (str != NULL) {
+        short len = getStrLen(str) - 1;
+        for (short i = 0; i < len; i++) {
+            printf("%c", *(str + i));
+        }
+        printf("\n");
     }
-    
-    for (short i = 0; !ifIsEnd(*(str + i)); i++) {
-        printf("%c", *(str + i));
-    }
-    
-    return 0;
+        
+    return suc;
 }
 
 
@@ -812,7 +963,7 @@ int showPage(char ***page) {
     
     for (short i = 0; i < pageLength; i++) {
         for (short j = 0; *(*(*(page + i) + j)) != (char)10; j++) {
-            printf("%s", *(*(page + i) + j));
+            showStr(*(*(page + i) + j));
         }
     }
     
@@ -826,20 +977,24 @@ int showLabel(labelNode *label) {
     }
     
     for (short i = 0; i < labelCount; i++) {
-        printf("%hd -- %s", (*(label + i)).locat, (*(label + i)).label);
+        printf("%hd -- ", (*(label + i)).locat);
+        showStr((*(label + i)).label);
     }
     
     return 0;
 }
 
 int showVar(varNode *var) {
+    int suc = 0;
     
-    if (var == NULL) {
-        return 1;
-    }
-    
-    for (short i = 0; i < varCount; i++) {
-        printf("%hd -- %hd -- %s", (*(var + i)).rowIndex, (*(var + i)).colIndex, (*(var + i)).label);
+    if (var != NULL) {
+        for (short i = 0; i < varCount; i++) {
+            printf("%hd -- %hd -- %hd --", (*(var + i)).rowIndex, (*(var + i)).colIndex, (*(var + i)).varType);
+            showStr((*(var + i)).label);
+        }
+    } else {
+        suc = 1;
+        printf("sa------\n");
     }
     
     return 0;
