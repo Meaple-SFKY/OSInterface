@@ -1,17 +1,10 @@
 echo hello issn
 echo %asada% > sadfg
 goto label
-set saaafff=10
-set saaafff=10
-set saaafff=10
-set saaafff=10
-set saaafff=10
-set saaafff=10
-set saaafff=10
-set saaafff=10
 set asada=10
 :label
 set saaafff=10
+echo
 set asada=9
 set \a asa=
 set asada=9

@@ -30,6 +30,7 @@ int process(char ***page, labelNode *label, varNode *var, short rowPos) {
             printf("set : ----\n");
             
             // TODO
+            processSet(*(page + i), 1, var);
             
         } else if (ifIsFor(str)) {
             printf("for : ----\n");
@@ -164,6 +165,38 @@ bool processSet(char **word, short pos, varNode *var) {
     // TODO
     if (word != NULL) {
         
+        if (ifIsEnd(*(*(word + pos)))) {
+            showVar(var);
+        } else {
+            short len = getStrLen(*(word + pos));
+            
+            if (len == 3) {
+                if (!ifIsEnd(*(*(word + pos + 1)))) {
+                    short slashInfo = ifIsSla(*(word + pos));
+                    
+                    if (slashInfo == 0) {
+                        char *name = getVarNam(*(word + pos + 1));
+                        char *value = getVarVal(*(word + pos + 1));
+                        
+                        // TODO
+                        if (!setVarVal(name, value, var)) {
+                            printf("Set(0) Error!\n");
+                        }
+                    } else if (slashInfo == 1) {
+                        
+                    } else {
+                        printf("Set(2) Error!\n");
+                        suc = false;
+                    }
+                }
+            } else {
+                char *name = getVarNam(*(word + pos));
+                char *value = getVarVal(*(word + pos));
+                if (!setVarVal(name, value, var)) {
+                    printf("Set(3) Error!\n");
+                }
+            }
+        }
     }
     
     return suc;

@@ -7,7 +7,7 @@
 - 具体命令格式可参照 Windows 的 CMD.EXE 或 MS-DOS 提供的命令
     - IF
     - FOR
-    - ---WHILE---
+    - WHILE(none)
     - SET
     - SHIFT
     - ECHO

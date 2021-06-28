@@ -514,6 +514,67 @@ char *getEchoPath(char **str, short anbPos, short info) {
     return pathStr;
 }
 
+char *getVarNam(char *str) {
+    char *varNam = NULL;
+    
+    // TODO
+    if (str != NULL) {
+        short index = ifHavEqo(str);
+        
+        if ((index != -1) && (index != 0)) {
+            
+            varNam = (char *)malloc((index + 1) * sizeof(char));
+            for (short i = 0; i < index; i++) {
+                *(varNam + i) = *(str + i);
+            }
+            *(varNam + index) = (char)10;
+        }
+    }
+    
+    return varNam;
+}
+
+char *getVarVal(char *str) {
+    char *varVal = NULL;
+    
+    // TODO
+    if (str != NULL) {
+        short index = ifHavEqo(str);
+        
+        if ((index != -1) && (index != 0)) {
+            short len = getStrLen(str) - index - 2;
+            
+            varVal = (char *)malloc((len + 1) * sizeof(char));
+            for (short i = 0; i < len; i++) {
+                *(varVal + i) = *(str + index + i + 1);
+            }
+            *(varVal + len) = (char)10;
+        }
+    }
+    
+    return varVal;
+}
+
+bool setVarVal(char *name, char *val, varNode *var) {
+    bool suc = false;
+    
+    // TODO
+    if ((name != NULL) && (val != NULL) && (*val != (char)10)) {
+        for (short i = 0; i < varCount; i++) {
+            if (strCmp(name, (*(var + i)).label) == true) {
+                short len = getStrLen(val);
+                (*(var + i)).value = (char *)realloc((*(var + i)).value, len * sizeof(char));
+                for (short j = 0; j < len; j++) {
+                    *((*(var + i)).value + j) = *(val + j);
+                }
+                suc = true;
+            }
+        }
+    }
+    
+    return suc;
+}
+
 char *getEchoValue(char **str, short pos, short anbPos, short info) {
     char *echoValue = NULL;
     
@@ -871,7 +932,8 @@ varNode *varInfo(char ***page) {
                                 (*(var + temp)).colIndex = j + 1;
                                 (*(var + temp)).varType = 2;
                                 (*(var + temp)).label = (char *)malloc((index + 1) * sizeof(char));
-                                (*(var + temp)).value = (char *)malloc(len + sizeof(char));
+                                (*(var + temp)).value = (char *)malloc(len * sizeof(char));
+                                *((*(var + temp)).value + len - 1) = (char)10;
 
                                 for (short p = 0; p < index; p++) {
                                     *((*(var + temp)).label + p) = *(*(*(page + i) + j + 1) + p);
@@ -907,7 +969,8 @@ varNode *varInfo(char ***page) {
                                     (*(var + temp)).colIndex = j + 2;
                                     (*(var + temp)).varType = tempPa;
                                     (*(var + temp)).label = (char *)malloc((index + 1) * sizeof(char));
-                                    (*(var + temp)).value = (char *)malloc(len + sizeof(char));
+                                    (*(var + temp)).value = (char *)malloc(len * sizeof(char));
+                                    *((*(var + temp)).value + len - 1) = (char)10;
                                     
                                     for (short p = 0; p < index; p++) {
                                         *((*(var + temp)).label + p) = *(*(*(page + i) + j + 2) + p);
@@ -948,6 +1011,19 @@ int showStr(char *str) {
         for (short i = 0; i < len; i++) {
             printf("%c", *(str + i));
         }
+    }
+        
+    return suc;
+}
+
+int showStrN(char *str) {
+    int suc = 0;
+    
+    if (str != NULL) {
+        short len = getStrLen(str) - 1;
+        for (short i = 0; i < len; i++) {
+            printf("%c", *(str + i));
+        }
         printf("\n");
     }
         
@@ -963,7 +1039,7 @@ int showPage(char ***page) {
     
     for (short i = 0; i < pageLength; i++) {
         for (short j = 0; *(*(*(page + i) + j)) != (char)10; j++) {
-            showStr(*(*(page + i) + j));
+            showStrN(*(*(page + i) + j));
         }
     }
     
@@ -978,7 +1054,7 @@ int showLabel(labelNode *label) {
     
     for (short i = 0; i < labelCount; i++) {
         printf("%hd -- ", (*(label + i)).locat);
-        showStr((*(label + i)).label);
+        showStrN((*(label + i)).label);
     }
     
     return 0;
@@ -989,12 +1065,17 @@ int showVar(varNode *var) {
     
     if (var != NULL) {
         for (short i = 0; i < varCount; i++) {
-            printf("%hd -- %hd -- %hd --", (*(var + i)).rowIndex, (*(var + i)).colIndex, (*(var + i)).varType);
+            printf("%hd -- %hd -- %hd -- ", (*(var + i)).rowIndex, (*(var + i)).colIndex, (*(var + i)).varType);
             showStr((*(var + i)).label);
+            printf(" -- ");
+            if (*(*(var + i)).value != (char)10) {
+                showStrN((*(var + i)).value);
+            } else {
+                printf("none\n");
+            }
         }
     } else {
         suc = 1;
-        printf("sa------\n");
     }
     
     return 0;

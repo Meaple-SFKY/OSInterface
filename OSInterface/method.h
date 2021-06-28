@@ -34,6 +34,7 @@ typedef struct varNode {
 } varNode;
 
 int showStr(char *);
+int showStrN(char *);
 int showPage(char ***);
 int showLabel(labelNode *);
 int showVar(varNode *);
@@ -56,7 +57,10 @@ bool ifIsLEQ(char *);
 bool ifIsGTR(char *);
 bool ifIsGEQ(char *);
 bool echoFile(char *, char *, bool);
+bool setVarVal(char *, char *, varNode *);
 char *getValue(char *, varNode *);
+char *getVarNam(char *);
+char *getVarVal(char *);
 char *getStr(char *);
 char *getFollow(char **, short);
 char *getSubStr(char **, short, short);
