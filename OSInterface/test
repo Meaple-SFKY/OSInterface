@@ -6,6 +6,6 @@ set asada=10
 set saaafff=10
 echo
 set asada=9
-set \a asa=
+set /a asa=2*(3+1)
 set asada=9
 set

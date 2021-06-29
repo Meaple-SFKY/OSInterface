@@ -50,7 +50,7 @@ bool ifIsEnd(char ch) {
     bool ifEnd = false;
     
     // TODO
-    if (ch == (char)10) {
+    if (ch == endChar) {
         ifEnd = true;
     }
     
@@ -129,12 +129,12 @@ bool ifIsEcho(char *str) {
     
     // TODO
     if (str != NULL) {
-        char *strEcho = (char *)malloc(5 * sizeof(char));
+        char *strEcho = (char *)malloc(5 * charSize);
         *strEcho = 'e';
         *(strEcho + 1) = 'c';
         *(strEcho + 2) = 'h';
         *(strEcho + 3) = 'o';
-        *(strEcho + 4) = (char)10;
+        *(strEcho + 4) = endChar;
         
         if (strCmp(strEcho, str)) {
             ifEcho = true;
@@ -149,11 +149,11 @@ bool ifIsFor(char *str) {
     
     // TODO
     if (str != NULL) {
-        char *strFor = (char *)malloc(4 * sizeof(char));
+        char *strFor = (char *)malloc(4 * charSize);
         *strFor = 'f';
         *(strFor + 1) = 'o';
         *(strFor + 2) = 'r';
-        *(strFor + 3) = (char)10;
+        *(strFor + 3) = endChar;
         
         if (strCmp(strFor, str)) {
             ifFor = true;
@@ -168,12 +168,12 @@ bool ifIsGoto(char *str) {
     
     // TODO
     if (str != NULL) {
-        char *strGoto = (char *)malloc(5 * sizeof(char));
+        char *strGoto = (char *)malloc(5 * charSize);
         *strGoto = 'g';
         *(strGoto + 1) = 'o';
         *(strGoto + 2) = 't';
         *(strGoto + 3) = 'o';
-        *(strGoto + 4) = (char)10;
+        *(strGoto + 4) = endChar;
         
         if (strCmp(strGoto, str) == true) {
             ifGoto = true;
@@ -188,10 +188,10 @@ bool ifIsIf(char *str) {
     
     // TODO
     if (str != NULL) {
-        char *strIf = (char *)malloc(3 * sizeof(char));
+        char *strIf = (char *)malloc(3 * charSize);
         *strIf = 'i';
         *(strIf + 1) = 'f';
-        *(strIf + 2) = (char)10;
+        *(strIf + 2) = endChar;
         
         if (strCmp(strIf, str) == true) {
             ifIf = true;
@@ -206,11 +206,11 @@ bool ifIsSet(char *str) {
     
     // TODO
     if (str != NULL) {
-        char *strSet = (char *)malloc(4 * sizeof(char));
+        char *strSet = (char *)malloc(4 * charSize);
         *strSet = 's';
         *(strSet + 1) = 'e';
         *(strSet + 2) = 't';
-        *(strSet + 3) = (char)10;
+        *(strSet + 3) = endChar;
         
         if (strCmp(strSet, str) == true) {
             ifSet = true;
@@ -225,13 +225,13 @@ bool ifIsShift(char *str) {
     
     // TODO
     if (str != NULL) {
-        char *strShift = (char *)malloc(6 * sizeof(char));
+        char *strShift = (char *)malloc(6 * charSize);
         *strShift = 's';
         *(strShift + 1) = 'h';
         *(strShift + 2) = 'i';
         *(strShift + 3) = 'f';
         *(strShift + 4) = 't';
-        *(strShift + 5) = (char)10;
+        *(strShift + 5) = endChar;
         
         if (strCmp(strShift, str) == true) {
             ifShift = true;
@@ -246,11 +246,11 @@ bool ifIsEQU(char *str) {
     
     // TODO
     if (str != NULL) {
-        char *strEQU = (char *)malloc(4 * sizeof(char));
+        char *strEQU = (char *)malloc(4 * charSize);
         *strEQU = 'E';
         *(strEQU + 1) = 'Q';
         *(strEQU + 2) = 'U';
-        *(strEQU + 3) = (char)10;
+        *(strEQU + 3) = endChar;
         
         if (strCmp(strEQU, str) == true) {
             ifEQU = true;
@@ -265,11 +265,11 @@ bool ifIsNEQ(char *str) {
     
     // TODO
     if (str != NULL) {
-        char *strNEQ = (char *)malloc(4 * sizeof(char));
+        char *strNEQ = (char *)malloc(4 * charSize);
         *strNEQ = 'N';
         *(strNEQ + 1) = 'E';
         *(strNEQ + 2) = 'Q';
-        *(strNEQ + 3) = (char)10;
+        *(strNEQ + 3) = endChar;
         
         if (strCmp(strNEQ, str) == true) {
             ifNEQ = true;
@@ -284,11 +284,11 @@ bool ifIsLSS(char *str) {
     
     // TODO
     if (str != NULL) {
-        char *strLSS = (char *)malloc(4 * sizeof(char));
+        char *strLSS = (char *)malloc(4 * charSize);
         *strLSS = 'L';
         *(strLSS + 1) = 'S';
         *(strLSS + 2) = 'S';
-        *(strLSS + 3) = (char)10;
+        *(strLSS + 3) = endChar;
         
         if (strCmp(strLSS, str) == true) {
             ifLSS = true;
@@ -303,11 +303,11 @@ bool ifIsLEQ(char *str) {
     
     // TODO
     if (str != NULL) {
-        char *strLEQ = (char *)malloc(4 * sizeof(char));
+        char *strLEQ = (char *)malloc(4 * charSize);
         *strLEQ = 'L';
         *(strLEQ + 1) = 'E';
         *(strLEQ + 2) = 'Q';
-        *(strLEQ + 3) = (char)10;
+        *(strLEQ + 3) = endChar;
         
         if (strCmp(strLEQ, str) == true) {
             ifLEQ = true;
@@ -322,11 +322,11 @@ bool ifIsGTR(char *str) {
     
     // TODO
     if (str != NULL) {
-        char *strGTR = (char *)malloc(4 * sizeof(char));
+        char *strGTR = (char *)malloc(4 * charSize);
         *strGTR = 'G';
         *(strGTR + 1) = 'T';
         *(strGTR + 2) = 'R';
-        *(strGTR + 3) = (char)10;
+        *(strGTR + 3) = endChar;
         
         if (strCmp(strGTR, str) == true) {
             ifGTR = true;
@@ -341,11 +341,11 @@ bool ifIsGEQ(char *str) {
     
     // TODO
     if (str != NULL) {
-        char *strGQU = (char *)malloc(4 * sizeof(char));
+        char *strGQU = (char *)malloc(4 * charSize);
         *strGQU = 'G';
         *(strGQU + 1) = 'E';
         *(strGQU + 2) = 'Q';
-        *(strGQU + 3) = (char)10;
+        *(strGQU + 3) = endChar;
         
         if (strCmp(strGQU, str) == true) {
             ifGEQ = true;
@@ -353,6 +353,34 @@ bool ifIsGEQ(char *str) {
     }
     
     return ifGEQ;
+}
+
+bool ifIsDig(char ch) {
+    bool ifDig = false;
+    
+    // TODO
+    if ((ch > (char)47) && (ch < (char)58)) {
+        ifDig = true;
+    }
+    
+    return ifDig;
+}
+
+short ifIsOpe(char ch) {
+    short ifOpe = -1;
+    
+    // TODO
+    if ((ch == (char)43) || (ch == (char)45)) {
+        ifOpe = 0;
+    } else if ((ch == (char)42) || (ch == (char)47) || (ch == (char)37)) {
+        ifOpe = 1;
+    } else if (ch == (char)40) {
+        ifOpe = 2;
+    } else if (ch == (char)41) {
+        ifOpe = 3;
+    }
+    
+    return ifOpe;
 }
 
 bool echoFile(char *path, char *str, bool mode) {
@@ -389,31 +417,31 @@ char **getBraStr(char **str, short startPos, short endPos) {
     if (str != NULL) {
         short len = endPos - startPos + 1;
         buffer = (char **)malloc((len + 1) * sizeof(char *));
-        *(buffer + len) = (char *)malloc(sizeof(char));
-        *(*(buffer + len)) = (char)10;
+        *(buffer + len) = (char *)malloc(charSize);
+        *(*(buffer + len)) = endChar;
         
         for (short i = 0; i < len; i++) {
             short innerLen = getStrLen(*(str + startPos + i));
             
             if ((ifIsBrack(*(*(str + startPos + i))) == 0) && (ifIsBrack(*(*(str + startPos + i) + innerLen - 2)) != 1)) {
-                *(buffer + i) = (char *)malloc((innerLen - 1) * sizeof(char));
+                *(buffer + i) = (char *)malloc((innerLen - 1) * charSize);
                 for (short j = 1; j < innerLen; j++) {
                     *(*(buffer + i) + j - 1) = *(*(str + startPos + i) + j);
                 }
             } else if ((ifIsBrack(*(*(str + startPos + i))) == 0) && (ifIsBrack(*(*(str + startPos + i) + innerLen - 2)) == 1)) {
-                *(buffer + i) = (char *)malloc((innerLen - 2) * sizeof(char));
+                *(buffer + i) = (char *)malloc((innerLen - 2) * charSize);
                 for (short j = 1; j < innerLen - 2; j++) {
                     *(*(buffer + i) + j - 1) = *(*(str + startPos + i) + j);
                 }
-                *(*(buffer + i) + innerLen - 3) = (char)10;
+                *(*(buffer + i) + innerLen - 3) = endChar;
             } else if ((ifIsBrack(*(*(str + startPos + i))) != 0) && (ifIsBrack(*(*(str + startPos + i) + innerLen - 2)) == 1)) {
-                *(buffer + i) = (char *)malloc((innerLen - 1) * sizeof(char));
+                *(buffer + i) = (char *)malloc((innerLen - 1) * charSize);
                 for (short j = 0; j < innerLen - 2; j++) {
                     *(*(buffer + i) + j) = *(*(str + startPos + i) + j);
                 }
-                *(*(buffer + i) + innerLen - 2) = (char)10;
+                *(*(buffer + i) + innerLen - 2) = endChar;
             } else {
-                *(buffer + i) = (char *)malloc(innerLen * sizeof(char));
+                *(buffer + i) = (char *)malloc(innerLen * charSize);
                 for (short j = 0; j < innerLen; j++) {
                     *(*(buffer + i) + j) = *(*(str + startPos + i) + j);
                 }
@@ -438,7 +466,7 @@ char *getFollow(char **str, short pos) {
             countStr++;
         }
         
-        followStr = (char *)malloc((countCh + countStr) * sizeof(char));
+        followStr = (char *)malloc((countCh + countStr) * charSize);
         
         for (short i = pos; !ifIsEnd(*(*(str + i))); i++) {
             short len = getStrLen(*(str + i));
@@ -449,7 +477,7 @@ char *getFollow(char **str, short pos) {
             *(followStr + temp) = (char)32;
             temp++;
         }
-        *(followStr + countCh + countStr - 1) = (char)10;
+        *(followStr + countCh + countStr - 1) = endChar;
     }
     
     return followStr;
@@ -467,7 +495,7 @@ char *getSubStr(char **str, short startPos, short endPos) {
             countCh += getStrLen(*(str + i)) - 1;
         }
         
-        subStr = (char *)malloc((countCh + countStr) * sizeof(char));
+        subStr = (char *)malloc((countCh + countStr) * charSize);
         
         for (short i = startPos; i < endPos; i++) {
             short len = getStrLen(*(str + i));
@@ -478,7 +506,7 @@ char *getSubStr(char **str, short startPos, short endPos) {
             *(subStr + temp) = (char)32;
             temp++;
         }
-        *(subStr + countCh + countStr - 1) = (char)10;
+        *(subStr + countCh + countStr - 1) = endChar;
     }
     
     return subStr;
@@ -491,7 +519,7 @@ char *getStr(char *str) {
     if (str != NULL) {
         short len = getStrLen(str) - 1;
         
-        tempStr = (char *)malloc(len * sizeof(char));
+        tempStr = (char *)malloc(len * charSize);
         
         for (short i = 0; i < len; i++) {
             *(tempStr + i) = *(str + i);
@@ -523,11 +551,11 @@ char *getVarNam(char *str) {
         
         if ((index != -1) && (index != 0)) {
             
-            varNam = (char *)malloc((index + 1) * sizeof(char));
+            varNam = (char *)malloc((index + 1) * charSize);
             for (short i = 0; i < index; i++) {
                 *(varNam + i) = *(str + i);
             }
-            *(varNam + index) = (char)10;
+            *(varNam + index) = endChar;
         }
     }
     
@@ -544,26 +572,244 @@ char *getVarVal(char *str) {
         if ((index != -1) && (index != 0)) {
             short len = getStrLen(str) - index - 2;
             
-            varVal = (char *)malloc((len + 1) * sizeof(char));
+            varVal = (char *)malloc((len + 1) * charSize);
             for (short i = 0; i < len; i++) {
                 *(varVal + i) = *(str + index + i + 1);
             }
-            *(varVal + len) = (char)10;
+            *(varVal + len) = endChar;
         }
     }
     
     return varVal;
 }
 
+char *digToStr(int dig) {
+    char *str = NULL;
+    short len = 0;
+    int temp = dig;
+    short flag = 0;
+    
+    // TODO
+    while (temp / 10 != 0) {
+        temp /= 10;
+        len++;
+    }
+    
+    if (temp < 0) {
+        len += 2;
+        str = (char *)malloc((len + 1)* charSize);
+        *str = (char)45;
+        dig = -dig;
+        flag++;
+    } else {
+        len += 1;
+        str = (char *)malloc((len + 1)* charSize);
+    }
+    
+    for (short i = flag; i < len; i++) {
+        temp = (dig % decPow(len - i)) / decPow(len - i - 1);
+        *(str + i) = (char)(temp + 48);
+    }
+    *(str + len) = endChar;
+    
+    return str;
+}
+
+char *setArith(char *str) {
+    char *ariCount = NULL;
+    bool gloFla = true;
+    
+    // TODO
+    if (str != NULL && (getStrLen(str) - 1 > 0)) {
+        short len = getStrLen(str) - 1;
+        bool flag = true;
+        
+        for (short i = 0; i < len; i++) {
+            if ((!ifIsDig(*(str + i))) && (ifIsOpe(*(str + i)) == -1)) {
+                flag = false;
+                break;
+            }
+        }
+        
+        if (flag) {
+            ariSen *ari = NULL;
+            short digCou = 0;
+            short opeCou = 0;
+            short totCou = 0;
+            short ariTemp = 0;
+            
+            if (ifIsOpe(*str) != -1) {
+                opeCou++;
+            }
+            
+            for (short i = 0; i < len - 1; i++) {
+                if (ifIsOpe(*(str + i + 1)) != -1) {
+                    opeCou++;
+                    
+                    if (ifIsDig(*(str + i))) {
+                        digCou++;
+                    }
+                }
+            }
+            
+            if (ifIsDig(*(str + len - 1))) {
+                digCou++;
+            }
+            
+            totCou = opeCou + digCou;
+            ari = (ariSen *)malloc(totCou * sizeof(ariSen));
+            
+            for (short i = 0; i < len; i++) {
+                if(ifIsOpe(*(str + i)) != -1) {
+                    ariSen temAri = getAriSen(false);
+                    temAri.ope = *(str + i);
+                    *(ari + ariTemp) = temAri;
+                    ariTemp++;
+                } else if (ifIsDig(*(str + i))) {
+                    short digLen = 0;
+                    char *tempStr = NULL;
+                    
+                    for (short j = i; j < len; j++) {
+                        if (!ifIsDig(*(str + j))) {
+                            i = j - 1;
+                            break;
+                        }
+                        digLen++;
+                    }
+                    
+                    tempStr = (char *)malloc((digLen + 1) * charSize);
+                    
+                    for (short j = i; j < len; j++) {
+                        if (!ifIsDig(*(str + j))) {
+                            i = j - 1;
+                            break;
+                        }
+                        *(tempStr + j - i) = *(str + j);
+                    }
+                    *(tempStr + digLen) = endChar;
+                    
+                    ariSen temAri = getAriSen(true);
+                    temAri.data = strToDig(tempStr);
+                    *(ari + ariTemp) = temAri;
+                    ariTemp++;
+                }
+            }
+            
+            ariTemp = 0;
+            
+            while (totCou != 1) {
+                if (ariTemp == totCou)  {
+                    ariTemp -= 1;
+                }
+                if ((*(ari + ariTemp)).ariType == true) {
+                    if ((ariTemp > 1) && ((*(ari + ariTemp - 2)).ariType == true) && ((*(ari + ariTemp - 1)).ariType == false)) {
+                        if (ariTemp < totCou - 1) {
+                            char opeBef = (*(ari + ariTemp - 1)).ope;
+                            char opeAft = (*(ari + ariTemp + 1)).ope;
+                            
+                            if (((ifIsOpe(opeBef) == 0) && (ifIsOpe(opeAft) == 0)) || ((ifIsOpe(opeBef) == 1) && (ifIsOpe(opeAft) == 1)) || ((ifIsOpe(opeBef) == 1) && (ifIsOpe(opeAft) == 0))) {
+                                int tempVal = ariVal((*(ari + ariTemp - 2)).data, (*(ari + ariTemp)).data, opeBef);
+                                
+                                if (tempVal != overFlow) {
+                                    (*(ari + ariTemp - 2)).data = tempVal;
+                                    
+                                    for (short i = ariTemp - 1; i < totCou - 2; i++) {
+                                        (*(ari + i)).ariType = (*(ari + i + 2)).ariType;
+                                        (*(ari + i)).data = (*(ari + i + 2)).data;
+                                        (*(ari + i)).ope = (*(ari + i + 2)).ope;
+                                    }
+                                    ariTemp -= 2;
+                                    totCou -= 2;
+                                } else {
+                                    printf("Error 1: String Illegal\n");
+                                    break;
+                                }
+                            }
+                        } else {
+                            int tempVal = ariVal((*(ari + ariTemp - 2)).data, (*(ari + ariTemp)).data, (*(ari + ariTemp - 1)).ope);
+                            
+                            if (tempVal != overFlow) {
+                                (*(ari + ariTemp - 2)).data = tempVal;
+                                ariTemp -= 3;
+                                totCou -= 2;
+                            } else {
+                                printf("Error 2: String Illegal\n");
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    if (ifIsOpe((*(ari + ariTemp)).ope) == 3) {
+                        if ((ariTemp > 0) && (ifIsOpe((*(ari + ariTemp - 1)).ope) == 2)) {
+                            for (short i = ariTemp - 1; i < totCou - 2; i++) {
+                                (*(ari + i)).ariType = (*(ari + i + 2)).ariType;
+                                (*(ari + i)).data = (*(ari + i + 2)).data;
+                                (*(ari + i)).ope = (*(ari + i + 2)).ope;
+                            }
+                            ariTemp -= 2;
+                            totCou -= 2;
+                        } else if ((ariTemp > 3) && (ifIsOpe((*(ari + ariTemp - 4)).ope) == 2)) {
+                            if (((*(ari + ariTemp - 3)).ariType == true) && ((*(ari + ariTemp - 2)).ariType == false) && ((*(ari + ariTemp - 1)).ariType == true)) {
+                                int digBef = (*(ari + ariTemp - 3)).data;
+                                int digAft = (*(ari + ariTemp - 1)).data;
+                                char opeSig = (*(ari + ariTemp - 2)).ope;
+                                int tempVal = ariVal(digBef, digAft, opeSig);
+                                
+                                if (tempVal != overFlow) {
+                                    (*(ari + ariTemp - 4)).ariType = true;
+                                    (*(ari + ariTemp - 4)).data = tempVal;
+                                    (*(ari + ariTemp - 4)).ope = endChar;
+                                    
+                                    for (short i = ariTemp - 3; i < totCou - 4; i++) {
+                                        (*(ari + i)).ariType = (*(ari + i + 4)).ariType;
+                                        (*(ari + i)).data = (*(ari + i + 4)).data;
+                                        (*(ari + i)).ope = (*(ari + i + 4)).ope;
+                                    }
+                                    ariTemp -= 4;
+                                    totCou -= 4;
+                                } else {
+                                    printf("Error 5: String Illegal\n");
+                                    gloFla = false;
+                                    break;
+                                }
+                            } else {
+                                printf("Error 4: String Illegal\n");
+                                gloFla = false;
+                                break;
+                            }
+                        } else {
+                            printf("Error 5: String Illegal\n");
+                            gloFla = false;
+                            break;
+                        }
+                    }
+                }
+                ariTemp++;
+            }
+            
+            if (gloFla) {
+                ariCount = digToStr((*ari).data);
+            } else {
+                printf("Error 6: String Illegal\n");
+            }
+            
+        } else {
+            printf("Error 7: String Illegal\n");
+        }
+    }
+    
+    return ariCount;
+}
+
 bool setVarVal(char *name, char *val, varNode *var) {
     bool suc = false;
     
     // TODO
-    if ((name != NULL) && (val != NULL) && (*val != (char)10)) {
+    if ((name != NULL) && (val != NULL) && (*val != endChar)) {
         for (short i = 0; i < varCount; i++) {
             if (strCmp(name, (*(var + i)).label) == true) {
                 short len = getStrLen(val);
-                (*(var + i)).value = (char *)realloc((*(var + i)).value, len * sizeof(char));
+                (*(var + i)).value = (char *)realloc((*(var + i)).value, len * charSize);
                 for (short j = 0; j < len; j++) {
                     *((*(var + i)).value + j) = *(val + j);
                 }
@@ -588,6 +834,71 @@ char *getEchoValue(char **str, short pos, short anbPos, short info) {
     return echoValue;
 }
 
+int decPow(int powNum) {
+    int dig = overFlow;
+    
+    // TODO
+    if (powNum >= 0) {
+        short temp = 1;
+        
+        for (short i = 0; i < powNum; i++) {
+            temp *= 10;
+        }
+        dig = temp;
+    }
+    
+    return dig;
+}
+
+int strToDig(char *str) {
+    int dig = overFlow;
+    int flag = 1;
+    
+    // TODO
+    if ((str != NULL) && (*str != endChar)) {
+        short len = getStrLen(str) - 1;
+        int temp = 0;
+        int pos = 0;
+        
+        if (*str == (char)45) {
+            flag = -1;
+            pos++;
+        }
+        
+        for (int i = pos; i < len; i++) {
+            int dec = decPow(len - i - 1);
+            
+            if (dec != overFlow) {
+                temp += (int)(*(str + i) - '0') * dec;
+                dig = temp;
+            } else {
+                break;
+            }
+        }
+    }
+    
+    return flag * dig;
+}
+
+int ariVal(int num_fir, int num_sec, char ch) {
+    int value = overFlow;
+    
+    // TODO
+    if (ch == '+') {
+        value = num_fir + num_sec;
+    } else if (ch == '-') {
+        value = num_fir - num_sec;
+    } else if (ch == '*') {
+        value = num_fir * num_sec;
+    } else if (ch == '/') {
+        value = num_fir / num_sec;
+    } else if (ch == '%') {
+        value = num_fir % num_sec;
+    }
+    
+    return value;
+}
+
 short ifHavEqo(char *str) {
     short ifHav = -1;
     
@@ -610,7 +921,7 @@ short ifIsSla(char *str) {
     
     // TODO
     if ((str != NULL) && (getStrLen(str) == 3)) {
-        if ((*str == (char)92) && (*(str + 2) == (char)10)) {
+        if ((*str == (char)47) && (*(str + 2) == endChar)) {
             if (*(str + 1) == 'a') {
                 ifSla = 0;
             } else if (*(str + 1) == 'p') {
@@ -628,16 +939,16 @@ short *ifHavAnb(char **str, short pos) {
     // TODO
     if (str != NULL) {
         ifAnb = (short *)malloc(2 * sizeof(short));
-        char *strLefSinAnb = (char *)malloc(2 * sizeof(char));
-        char *strLefDouAnb = (char *)malloc(3 * sizeof(char));
+        char *strLefSinAnb = (char *)malloc(2 * charSize);
+        char *strLefDouAnb = (char *)malloc(3 * charSize);
         
         *ifAnb = -1;
         *(ifAnb + 1) = -1;
         *strLefSinAnb = '>';
-        *(strLefSinAnb + 1) = (char)10;
+        *(strLefSinAnb + 1) = endChar;
         *strLefDouAnb = '>';
         *(strLefDouAnb + 1) = '>';
-        *(strLefDouAnb + 2) = (char)10;
+        *(strLefDouAnb + 2) = endChar;
         
         for (short i = pos; !ifIsEnd(*(*(str + i))); i++) {
             if (strCmp(strLefSinAnb, *(str + i))) {
@@ -658,7 +969,7 @@ short getStrLen(char *sentence) {
     
     // TODO
     if (sentence != NULL) {
-        while (*(sentence + len) != (char)10) {
+        while (*(sentence + len) != endChar) {
             len++;
         }
         len++;
@@ -689,8 +1000,8 @@ short getVarCou(char **str, short count) {
         char **tempStr = (char **)malloc(count * sizeof(char *));
                 
         for (short i = 0; i < count; i++) {
-            *(tempStr + i) = (char *)malloc(sizeof(char));
-            *(*(tempStr + i)) = (char)10;
+            *(tempStr + i) = (char *)malloc(charSize);
+            *(*(tempStr + i)) = endChar;
         }
         
         for (short i = 0; i < count; i++) {
@@ -755,8 +1066,8 @@ char **strToTwoDem(char *sentence) {
         matrix = (char **)malloc((count + 1) * sizeof(char *));
         tempMat = (short *)malloc(count * sizeof(short));
         
-        *(matrix + count) = (char *)malloc(sizeof(char));
-        *(*(matrix + count)) = (char)10;
+        *(matrix + count) = (char *)malloc(charSize);
+        *(*(matrix + count)) = endChar;
         *(tempMat + count - 1) = len - 2;
         
         for (short i = 0; i < len - 1; i++) {
@@ -767,23 +1078,23 @@ char **strToTwoDem(char *sentence) {
         }
         temp++;
         
-        *matrix = (char *)malloc((*tempMat + 2 - start) * sizeof(char));
+        *matrix = (char *)malloc((*tempMat + 2 - start) * charSize);
         
         for (short i = 0; i < *tempMat + 1 - start; i++) {
             *(*matrix + i) = *(sentence + i + start);
         }
-        *(*matrix + *tempMat - start + 1) = (char)10;
+        *(*matrix + *tempMat - start + 1) = endChar;
         
         if (temp > 1) {
             for (short i = 0; i < temp - 1; i++) {
                 for (short j = *(tempMat + i); j < *(tempMat + i + 1); j++) {
                     if (ifIsSpace(*(sentence + j)) && (!ifIsSpace(*(sentence + j + 1)))) {
                         short newLen = *(tempMat + i + 1) - j;
-                        *(matrix + i + 1) = (char *)malloc((newLen + 1) * sizeof(char));
+                        *(matrix + i + 1) = (char *)malloc((newLen + 1) * charSize);
                         for (short p = 0; p < newLen; p++) {
                             *(*(matrix + i + 1) + p) = *(sentence + p + j + 1);
                         }
-                        *(*(matrix + i + 1) + newLen) = (char)10;
+                        *(*(matrix + i + 1) + newLen) = endChar;
                     }
                 }
             }
@@ -811,7 +1122,7 @@ labelNode *labelInfo(char ***page) {
             if (ifIsColon(*(*(*(page + i)))) == true) {
                 short len = getStrLen(*(*(page + i))) - 1;
                 (*(label + temp)).locat = i;
-                (*(label + temp)).label = (char *)malloc(len * sizeof(char));
+                (*(label + temp)).label = (char *)malloc(len * charSize);
                 for (short j = 0; j < len; j++) {
                     *((*(label + temp)).label + j) = *(*(*(page + i)) + j + 1);
                 }
@@ -868,12 +1179,12 @@ varNode *varInfo(char ***page) {
                         short index = ifHavEqo(*(*(page + i) + j + 1));
                         
                         if ((index != -1) && (index != 0)) {
-                            *(temVar + temp) = (char *)malloc((index + 1) * sizeof(char));
+                            *(temVar + temp) = (char *)malloc((index + 1) * charSize);
 
                             for (short p = 0; p < index; p++) {
                                 *(*(temVar + temp) + p) = *(*(*(page + i) + j + 1) + p);
                             }
-                            *(*(temVar + temp) + index) = (char)10;
+                            *(*(temVar + temp) + index) = endChar;
                             temp++;
                         }
                     } else if ((len == 3) && (j < douLen - 2)) {
@@ -881,12 +1192,12 @@ varNode *varInfo(char ***page) {
                         
                         if ((index != -1) && (index != 0)) {
                             if (ifIsSla(*(*(page + i) + j + 1)) != -1) {
-                                *(temVar + temp) = (char *)malloc((index + 1) * sizeof(char));
+                                *(temVar + temp) = (char *)malloc((index + 1) * charSize);
 
                                 for (short p = 0; p < index; p++) {
                                     *(*(temVar + temp) + p) = *(*(*(page + i) + j + 2) + p);
                                 }
-                                *(*(temVar + temp) + index) = (char)10;
+                                *(*(temVar + temp) + index) = endChar;
                                 temp++;
                             }
                         }
@@ -907,17 +1218,17 @@ varNode *varInfo(char ***page) {
             for (short j = 0; j < douLen; j++) {
                 if (ifIsSet(*(*(page + i) + j)) && (j < douLen - 1)) {
                     short len = getStrLen(*(*(page + i) + j + 1));
+                    bool flag = true;
                     if (len > 3) {
-                        bool flag = true;
                         short index = ifHavEqo(*(*(page + i) + j + 1));
                         
                         if ((index != -1) && (index != 0)) {
-                            char *tempStr = (char *)malloc((index + 1) * sizeof(char));
+                            char *tempStr = (char *)malloc((index + 1) * charSize);
 
                             for (short p = 0; p < index; p++) {
                                 *(tempStr + p) = *(*(*(page + i) + j + 1) + p);
                             }
-                            *(tempStr + index) = (char)10;
+                            *(tempStr + index) = endChar;
 
                             for (short p = 0; p < temp; p++) {
                                 if (strCmp((*(var + p)).label, tempStr)) {
@@ -927,34 +1238,33 @@ varNode *varInfo(char ***page) {
                             }
 
                             if (flag == true) {
-                                short len = getStrLen(*(*(page + i) + j + 1)) - index - 1;
+                                short subLen = getStrLen(*(*(page + i) + j + 1)) - index - 1;
                                 (*(var + temp)).rowIndex = i;
                                 (*(var + temp)).colIndex = j + 1;
                                 (*(var + temp)).varType = 2;
-                                (*(var + temp)).label = (char *)malloc((index + 1) * sizeof(char));
-                                (*(var + temp)).value = (char *)malloc(len * sizeof(char));
-                                *((*(var + temp)).value + len - 1) = (char)10;
+                                (*(var + temp)).label = (char *)malloc((index + 1) * charSize);
+                                (*(var + temp)).value = (char *)malloc(len * charSize);
+                                *((*(var + temp)).value + subLen - 1) = endChar;
 
                                 for (short p = 0; p < index; p++) {
                                     *((*(var + temp)).label + p) = *(*(*(page + i) + j + 1) + p);
                                 }
-                                *((*(var + temp)).label + index) = (char)10;
+                                *((*(var + temp)).label + index) = endChar;
                                 temp++;
                             }
                         }
                     } else if ((len == 3) && (j < douLen - 2)) {
-                        bool flag = true;
                         short index = ifHavEqo(*(*(page + i) + j + 2));
                         
                         if ((index != -1) && (index != 0)) {
                             short tempPa = ifIsSla(*(*(page + i) + j + 1));
                             if (tempPa != -1) {
-                                char *tempStr = (char *)malloc((index + 1) * sizeof(char));
+                                char *tempStr = (char *)malloc((index + 1) * charSize);
 
                                 for (short p = 0; p < index; p++) {
                                     *(tempStr + p) = *(*(*(page + i) + j + 2) + p);
                                 }
-                                *(tempStr + index) = (char)10;
+                                *(tempStr + index) = endChar;
 
                                 for (short p = 0; p < temp; p++) {
                                     if (strCmp((*(var + p)).label, tempStr)) {
@@ -964,18 +1274,18 @@ varNode *varInfo(char ***page) {
                                 }
 
                                 if (flag == true) {
-                                    short len = getStrLen(*(*(page + i) + j + 2)) - index - 1;
+                                    short subLen = getStrLen(*(*(page + i) + j + 2)) - index - 1;
                                     (*(var + temp)).rowIndex = i;
                                     (*(var + temp)).colIndex = j + 2;
                                     (*(var + temp)).varType = tempPa;
-                                    (*(var + temp)).label = (char *)malloc((index + 1) * sizeof(char));
-                                    (*(var + temp)).value = (char *)malloc(len * sizeof(char));
-                                    *((*(var + temp)).value + len - 1) = (char)10;
+                                    (*(var + temp)).label = (char *)malloc((index + 1) * charSize);
+                                    (*(var + temp)).value = (char *)malloc(len * charSize);
+                                    *((*(var + temp)).value + subLen - 1) = endChar;
                                     
                                     for (short p = 0; p < index; p++) {
                                         *((*(var + temp)).label + p) = *(*(*(page + i) + j + 2) + p);
                                     }
-                                    *((*(var + temp)).label + index) = (char)10;
+                                    *((*(var + temp)).label + index) = endChar;
                                     temp++;
                                 }
                             }
@@ -987,6 +1297,16 @@ varNode *varInfo(char ***page) {
     }
     
     return var;
+}
+
+ariSen getAriSen(bool ariType) {
+    ariSen getAri = {
+        ariType,
+        overFlow,
+        endChar
+    };
+    
+    return getAri;
 }
 
 char *getValue(char *label, varNode *var) {
@@ -1011,6 +1331,8 @@ int showStr(char *str) {
         for (short i = 0; i < len; i++) {
             printf("%c", *(str + i));
         }
+    } else {
+        suc = 1;
     }
         
     return suc;
@@ -1025,6 +1347,8 @@ int showStrN(char *str) {
             printf("%c", *(str + i));
         }
         printf("\n");
+    } else {
+        suc = 1;
     }
         
     return suc;
@@ -1038,7 +1362,7 @@ int showPage(char ***page) {
     }
     
     for (short i = 0; i < pageLength; i++) {
-        for (short j = 0; *(*(*(page + i) + j)) != (char)10; j++) {
+        for (short j = 0; *(*(*(page + i) + j)) != endChar; j++) {
             showStrN(*(*(page + i) + j));
         }
     }
@@ -1068,7 +1392,7 @@ int showVar(varNode *var) {
             printf("%hd -- %hd -- %hd -- ", (*(var + i)).rowIndex, (*(var + i)).colIndex, (*(var + i)).varType);
             showStr((*(var + i)).label);
             printf(" -- ");
-            if (*(*(var + i)).value != (char)10) {
+            if (*(*(var + i)).value != endChar) {
                 showStrN((*(var + i)).value);
             } else {
                 printf("none\n");
@@ -1078,5 +1402,26 @@ int showVar(varNode *var) {
         suc = 1;
     }
     
-    return 0;
+    return suc;
+}
+
+int showAri(ariSen *ari, short size) {
+    int suc = 0;
+    
+    // TODO
+    if (ari != NULL) {
+        printf("Size: %d ---: ", size);
+        for (short i = 0; i < size; i++) {
+            if ((*(ari + i)).ariType) {
+                printf("%d", (*(ari + i)).data);
+            } else {
+                printf("%c", (*(ari + i)).ope);
+            }
+        }
+        printf("\n");
+    } else {
+        suc = 1;
+    }
+    
+    return suc;
 }

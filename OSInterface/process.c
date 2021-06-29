@@ -14,20 +14,20 @@ int process(char ***page, labelNode *label, varNode *var, short rowPos) {
         char *str = *(*(page + i));
         
         if (ifIsEcho(str)) {
-            printf("echo : ----\n");
+//            printf("echo : ----\n");
             
             // TODO
             processEcho(*(page + i), 1, var);
             
         } else if (ifIsGoto(str)) {
-            printf("goto : ----\n");
+//            printf("goto : ----\n");
             
             // TODO
             short p = processGoto(*(page + i), 1, label);
             i = p - 1;
             
         } else if (ifIsSet(str)) {
-            printf("set : ----\n");
+//            printf("set : ----\n");
             
             // TODO
             processSet(*(page + i), 1, var);
@@ -70,7 +70,7 @@ bool processEcho(char **word, short pos, varNode *var) {
         
         for (short i = 0; i < douLen; i++) {
             short len = getStrLen(*(word + i));
-            *(echoStr + i) = (char *)malloc(len * sizeof(char));
+            *(echoStr + i) = (char *)malloc(len * charSize);
             
             for (short j = 0; j < len; j++) {
                 *(*(echoStr + i) + j) = *(*(word + i) + j);
@@ -89,20 +89,20 @@ bool processEcho(char **word, short pos, varNode *var) {
             if ((anaMod == 0) || (anaMod == 1)) {
                 suc = false;
             } else {
-                char *value = (char *)malloc(anaMod * sizeof(char));
+                char *value = (char *)malloc(anaMod * charSize);
                 
                 for (short j = 1; j < anaMod; j++) {
                     *(value + j - 1) = *(*(echoStr + pos) + j);
                 }
                 
-                *(value + anaMod) = (char)10;
+                *(value + anaMod) = endChar;
                 value = getValue(value, var);
                 
                 if (value != NULL) {
                     
                     // TODO
                     short varLen = getStrLen(value);
-                    *(echoStr + pos) = (char *)realloc(*(echoStr + pos), varLen * sizeof(char));
+                    *(echoStr + pos) = (char *)realloc(*(echoStr + pos), varLen * charSize);
                     for (short i = 0; i < varLen; i++) {
                         *(*(echoStr + pos) + i) = *(value + i);
                     }
@@ -124,8 +124,6 @@ bool processEcho(char **word, short pos, varNode *var) {
                 char *value = getEchoValue(echoStr, pos, pathPos, pathInfo);
                 
                 if (path != NULL) {
-//                    printf("%s\n", path);
-//                    printf("%s\n", value);
                     
                     if (!echoFile(path, value, mode)) {
                         printf("Echo File Error!\n");
@@ -177,6 +175,7 @@ bool processSet(char **word, short pos, varNode *var) {
                     if (slashInfo == 0) {
                         char *name = getVarNam(*(word + pos + 1));
                         char *value = getVarVal(*(word + pos + 1));
+                        value = setArith(value);
                         
                         // TODO
                         if (!setVarVal(name, value, var)) {

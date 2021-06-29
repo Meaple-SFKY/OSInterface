@@ -18,7 +18,7 @@ char ***fileToPage(int argc, char *argv[], char ***page) {
     short length = 0;
     
     for (short i = 0; i < N + 1; i++) {
-        buffer[i] = (char)10;
+        buffer[i] = endChar;
     }
     
     if(argc != 2) {
@@ -44,8 +44,6 @@ char ***fileToPage(int argc, char *argv[], char ***page) {
     for (short i = 0; fgets(buffer, N, fp) != NULL; i++) {
         *(page + i) = strToTwoDem(buffer);
     }
-    
-    
     
     fclose(fp);
     

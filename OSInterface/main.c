@@ -19,11 +19,7 @@ int main(int argc, char * argv[]) {
     varNode *var = varInfo(page);
     process(page, label, var, 0);
     
-//    showPage(page);
-//    showLabel(label);
 //    showVar(var);
-    
-//    printf("%hd\n", varCount);
     
     return 0;
 }
