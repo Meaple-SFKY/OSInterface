@@ -21,6 +21,7 @@ bool strCmp(char *str_fir, char *str_sec) {
     } else if ((str_fir != NULL) && (str_sec != NULL)) {
         short len_fir = getStrLen(str_fir);
         short len_sec = getStrLen(str_sec);
+        
         if (len_fir != len_sec) {
             ifEqu = false;
         } else {
@@ -383,6 +384,29 @@ short ifIsOpe(char ch) {
     return ifOpe;
 }
 
+bool setVarVal(char *name, char *val, varNode *var) {
+    bool suc = false;
+    
+    // TODO
+    if ((name != NULL) && (val != NULL)) {
+        for (short i = 0; i < varCount; i++) {
+            if (strCmp(name, (*(var + i)).label) == true) {
+                short len = getStrLen(val);
+                (*(var + i)).value = (char *)realloc((*(var + i)).value, len * charSize);
+                
+                for (short j = 0; j < len; j++) {
+                    *((*(var + i)).value + j) = *(val + j);
+                }
+                if (len > 1) {
+                    suc = true;
+                }
+            }
+        }
+    }
+    
+    return suc;
+}
+
 bool echoFile(char *path, char *str, bool mode) {
     bool ifSuc = true;
     
@@ -425,23 +449,27 @@ char **getBraStr(char **str, short startPos, short endPos) {
             
             if ((ifIsBrack(*(*(str + startPos + i))) == 0) && (ifIsBrack(*(*(str + startPos + i) + innerLen - 2)) != 1)) {
                 *(buffer + i) = (char *)malloc((innerLen - 1) * charSize);
+                
                 for (short j = 1; j < innerLen; j++) {
                     *(*(buffer + i) + j - 1) = *(*(str + startPos + i) + j);
                 }
             } else if ((ifIsBrack(*(*(str + startPos + i))) == 0) && (ifIsBrack(*(*(str + startPos + i) + innerLen - 2)) == 1)) {
                 *(buffer + i) = (char *)malloc((innerLen - 2) * charSize);
+                
                 for (short j = 1; j < innerLen - 2; j++) {
                     *(*(buffer + i) + j - 1) = *(*(str + startPos + i) + j);
                 }
                 *(*(buffer + i) + innerLen - 3) = endChar;
             } else if ((ifIsBrack(*(*(str + startPos + i))) != 0) && (ifIsBrack(*(*(str + startPos + i) + innerLen - 2)) == 1)) {
                 *(buffer + i) = (char *)malloc((innerLen - 1) * charSize);
+                
                 for (short j = 0; j < innerLen - 2; j++) {
                     *(*(buffer + i) + j) = *(*(str + startPos + i) + j);
                 }
                 *(*(buffer + i) + innerLen - 2) = endChar;
             } else {
                 *(buffer + i) = (char *)malloc(innerLen * charSize);
+                
                 for (short j = 0; j < innerLen; j++) {
                     *(*(buffer + i) + j) = *(*(str + startPos + i) + j);
                 }
@@ -470,6 +498,7 @@ char *getFollow(char **str, short pos) {
         
         for (short i = pos; !ifIsEnd(*(*(str + i))); i++) {
             short len = getStrLen(*(str + i));
+            
             for (short j = 0; j < len - 1; j++) {
                 *(followStr + temp) = *(*(str + i) + j);
                 temp++;
@@ -499,6 +528,7 @@ char *getSubStr(char **str, short startPos, short endPos) {
         
         for (short i = startPos; i < endPos; i++) {
             short len = getStrLen(*(str + i));
+            
             for (short j = 0; j < len - 1; j++) {
                 *(subStr + temp) = *(*(str + i) + j);
                 temp++;
@@ -518,7 +548,6 @@ char *getStr(char *str) {
     // TODO
     if (str != NULL) {
         short len = getStrLen(str) - 1;
-        
         tempStr = (char *)malloc(len * charSize);
         
         for (short i = 0; i < len; i++) {
@@ -550,8 +579,8 @@ char *getVarNam(char *str) {
         short index = ifHavEqo(str);
         
         if ((index != -1) && (index != 0)) {
-            
             varNam = (char *)malloc((index + 1) * charSize);
+            
             for (short i = 0; i < index; i++) {
                 *(varNam + i) = *(str + i);
             }
@@ -571,8 +600,8 @@ char *getVarVal(char *str) {
         
         if ((index != -1) && (index != 0)) {
             short len = getStrLen(str) - index - 2;
-            
             varVal = (char *)malloc((len + 1) * charSize);
+            
             for (short i = 0; i < len; i++) {
                 *(varVal + i) = *(str + index + i + 1);
             }
@@ -597,13 +626,13 @@ char *digToStr(int dig) {
     
     if (temp < 0) {
         len += 2;
-        str = (char *)malloc((len + 1)* charSize);
+        str = (char *)malloc((len + 1) * charSize);
         *str = (char)45;
         dig = -dig;
         flag++;
     } else {
         len += 1;
-        str = (char *)malloc((len + 1)* charSize);
+        str = (char *)malloc((len + 1) * charSize);
     }
     
     for (short i = flag; i < len; i++) {
@@ -616,7 +645,8 @@ char *digToStr(int dig) {
 }
 
 char *setArith(char *str) {
-    char *ariCount = NULL;
+    char *ariCount = (char *)malloc(charSize);
+    *ariCount = endChar;
     bool gloFla = true;
     
     // TODO
@@ -687,7 +717,6 @@ char *setArith(char *str) {
                         *(tempStr + j - i) = *(str + j);
                     }
                     *(tempStr + digLen) = endChar;
-                    
                     ariSen temAri = getAriSen(true);
                     temAri.data = strToDig(tempStr);
                     *(ari + ariTemp) = temAri;
@@ -722,6 +751,7 @@ char *setArith(char *str) {
                                     totCou -= 2;
                                 } else {
                                     printf("Error 1: String Illegal\n");
+                                    gloFla = false;
                                     break;
                                 }
                             }
@@ -734,9 +764,14 @@ char *setArith(char *str) {
                                 totCou -= 2;
                             } else {
                                 printf("Error 2: String Illegal\n");
+                                gloFla = false;
                                 break;
                             }
                         }
+                    } else if ((ariTemp == totCou - 1) && (ariTemp > 1) && ((*(ari + ariTemp - 2)).ariType == false) && ((*(ari + ariTemp - 1)).ariType == false)) {
+                        printf("Error 3: String Illegal\n");
+                        gloFla = false;
+                        break;
                     }
                 } else {
                     if (ifIsOpe((*(ari + ariTemp)).ope) == 3) {
@@ -768,17 +803,17 @@ char *setArith(char *str) {
                                     ariTemp -= 4;
                                     totCou -= 4;
                                 } else {
-                                    printf("Error 5: String Illegal\n");
+                                    printf("Error 4: String Illegal\n");
                                     gloFla = false;
                                     break;
                                 }
                             } else {
-                                printf("Error 4: String Illegal\n");
+                                printf("Error 5: String Illegal\n");
                                 gloFla = false;
                                 break;
                             }
                         } else {
-                            printf("Error 5: String Illegal\n");
+                            printf("Error 6: String Illegal\n");
                             gloFla = false;
                             break;
                         }
@@ -790,7 +825,7 @@ char *setArith(char *str) {
             if (gloFla) {
                 ariCount = digToStr((*ari).data);
             } else {
-                printf("Error 6: String Illegal\n");
+                printf("Error: String Illegal\n");
             }
             
         } else {
@@ -801,24 +836,52 @@ char *setArith(char *str) {
     return ariCount;
 }
 
-bool setVarVal(char *name, char *val, varNode *var) {
-    bool suc = false;
+char *argToStr(char *argv) {
+    char *str = NULL;
     
     // TODO
-    if ((name != NULL) && (val != NULL) && (*val != endChar)) {
-        for (short i = 0; i < varCount; i++) {
-            if (strCmp(name, (*(var + i)).label) == true) {
-                short len = getStrLen(val);
-                (*(var + i)).value = (char *)realloc((*(var + i)).value, len * charSize);
-                for (short j = 0; j < len; j++) {
-                    *((*(var + i)).value + j) = *(val + j);
-                }
-                suc = true;
-            }
+    if (argv != NULL) {
+        short len = 0;
+        
+        for (short i = 0; *(argv + i) != (char)0; i++) {
+            len++;
         }
+        str = (char *)malloc((len + 1) * charSize);
+        
+        for (short i = 0; i < len; i++) {
+            *(str + i) = *(argv + i);
+        }
+        *(str + len) = endChar;
     }
     
-    return suc;
+    return str;
+}
+
+char *getInp(bool ifInp) {
+    char *str = NULL;
+    
+    if (ifInp) {
+        char ch;
+        short len = 0;
+        
+        do {
+            ch = getchar();
+            char *temStr = (char *)malloc(len * charSize);
+            
+            for (short i = 0; i < len; i++) {
+                *(temStr + i) = *(str + i);
+            }
+            len++;
+            str = (char *)realloc(str, len * charSize);
+            
+            for (short i = 0; i < len; i++) {
+                *(str + i) = *(temStr + i);
+            }
+            *(str + len - 1) = ch;
+        } while (ch != endChar);
+    }
+        
+    return str;
 }
 
 char *getEchoValue(char **str, short pos, short anbPos, short info) {
@@ -1065,7 +1128,6 @@ char **strToTwoDem(char *sentence) {
         
         matrix = (char **)malloc((count + 1) * sizeof(char *));
         tempMat = (short *)malloc(count * sizeof(short));
-        
         *(matrix + count) = (char *)malloc(charSize);
         *(*(matrix + count)) = endChar;
         *(tempMat + count - 1) = len - 2;
@@ -1077,7 +1139,6 @@ char **strToTwoDem(char *sentence) {
             }
         }
         temp++;
-        
         *matrix = (char *)malloc((*tempMat + 2 - start) * charSize);
         
         for (short i = 0; i < *tempMat + 1 - start; i++) {
@@ -1123,6 +1184,7 @@ labelNode *labelInfo(char ***page) {
                 short len = getStrLen(*(*(page + i))) - 1;
                 (*(label + temp)).locat = i;
                 (*(label + temp)).label = (char *)malloc(len * charSize);
+                
                 for (short j = 0; j < len; j++) {
                     *((*(label + temp)).label + j) = *(*(*(page + i)) + j + 1);
                 }
@@ -1175,6 +1237,7 @@ varNode *varInfo(char ***page) {
             for (short j = 0; j < douLen; j++) {
                 if (ifIsSet(*(*(page + i) + j)) && (j < douLen - 1)) {
                     short len = getStrLen(*(*(page + i) + j + 1));
+                    
                     if (len > 3) {
                         short index = ifHavEqo(*(*(page + i) + j + 1));
                         
@@ -1219,6 +1282,7 @@ varNode *varInfo(char ***page) {
                 if (ifIsSet(*(*(page + i) + j)) && (j < douLen - 1)) {
                     short len = getStrLen(*(*(page + i) + j + 1));
                     bool flag = true;
+                    
                     if (len > 3) {
                         short index = ifHavEqo(*(*(page + i) + j + 1));
                         
@@ -1238,13 +1302,12 @@ varNode *varInfo(char ***page) {
                             }
 
                             if (flag == true) {
-                                short subLen = getStrLen(*(*(page + i) + j + 1)) - index - 1;
                                 (*(var + temp)).rowIndex = i;
                                 (*(var + temp)).colIndex = j + 1;
                                 (*(var + temp)).varType = 2;
                                 (*(var + temp)).label = (char *)malloc((index + 1) * charSize);
-                                (*(var + temp)).value = (char *)malloc(len * charSize);
-                                *((*(var + temp)).value + subLen - 1) = endChar;
+                                (*(var + temp)).value = (char *)malloc(charSize);
+                                *((*(var + temp)).value) = endChar;
 
                                 for (short p = 0; p < index; p++) {
                                     *((*(var + temp)).label + p) = *(*(*(page + i) + j + 1) + p);
@@ -1258,6 +1321,7 @@ varNode *varInfo(char ***page) {
                         
                         if ((index != -1) && (index != 0)) {
                             short tempPa = ifIsSla(*(*(page + i) + j + 1));
+                            
                             if (tempPa != -1) {
                                 char *tempStr = (char *)malloc((index + 1) * charSize);
 
@@ -1274,13 +1338,12 @@ varNode *varInfo(char ***page) {
                                 }
 
                                 if (flag == true) {
-                                    short subLen = getStrLen(*(*(page + i) + j + 2)) - index - 1;
                                     (*(var + temp)).rowIndex = i;
                                     (*(var + temp)).colIndex = j + 2;
                                     (*(var + temp)).varType = tempPa;
                                     (*(var + temp)).label = (char *)malloc((index + 1) * charSize);
-                                    (*(var + temp)).value = (char *)malloc(len * charSize);
-                                    *((*(var + temp)).value + subLen - 1) = endChar;
+                                    (*(var + temp)).value = (char *)malloc(charSize);
+                                    *((*(var + temp)).value) = endChar;
                                     
                                     for (short p = 0; p < index; p++) {
                                         *((*(var + temp)).label + p) = *(*(*(page + i) + j + 2) + p);
@@ -1309,14 +1372,46 @@ ariSen getAriSen(bool ariType) {
     return getAri;
 }
 
+argNode setArgNod(int argc, char **argv) {
+    argNode node = {
+        NULL,
+        0
+    };
+    
+    // TODO
+    if (argc > 2) {
+        short len = argc - 2;
+        node.argVar = (char **)malloc(len * sizeof(char *));
+        node.count = len;
+        
+        for (short i = 0; i < len; i++) {
+            short subLen = 0;
+            
+            while (*(*(argv + i + 2) + subLen) != '\0') {
+                subLen++;
+            }
+            *(node.argVar + i) = (char *)malloc((subLen + 1) * charSize);
+            
+            for (short j = 0; j < subLen; j++) {
+                *(*(node.argVar + i) + j) = *(*(argv + i + 2) + j);
+            }
+            *(*(node.argVar + i) + subLen) = endChar;
+        }
+    }
+    
+    return node;
+}
+
 char *getValue(char *label, varNode *var) {
     char *value = NULL;
     
     // TODO
-    for (short i = 0; i < varCount; i++) {
-        if (strCmp(label, (*(var + i)).label)) {
-            value = (*(var + i)).value;
-            break;
+    if (label != NULL) {
+        for (short i = 0; i < varCount; i++) {
+            if (strCmp(label, (*(var + i)).label)) {
+                value = (*(var + i)).value;
+                break;
+            }
         }
     }
     
@@ -1328,8 +1423,9 @@ int showStr(char *str) {
     
     if (str != NULL) {
         short len = getStrLen(str) - 1;
+        
         for (short i = 0; i < len; i++) {
-            printf("%c", *(str + i));
+            putchar(*(str + i));
         }
     } else {
         suc = 1;
@@ -1344,9 +1440,9 @@ int showStrN(char *str) {
     if (str != NULL) {
         short len = getStrLen(str) - 1;
         for (short i = 0; i < len; i++) {
-            printf("%c", *(str + i));
+            putchar(*(str + i));
         }
-        printf("\n");
+        putchar('\n');
     } else {
         suc = 1;
     }
@@ -1419,6 +1515,21 @@ int showAri(ariSen *ari, short size) {
             }
         }
         printf("\n");
+    } else {
+        suc = 1;
+    }
+    
+    return suc;
+}
+
+int showArg(argNode arg) {
+    int suc = 0;
+    
+    if (arg.count > 0) {
+        printf("%hd\n", arg.count);
+        for (short i = 0; i < arg.count; i++) {
+            showStrN(*(arg.argVar + i));
+        }
     } else {
         suc = 1;
     }

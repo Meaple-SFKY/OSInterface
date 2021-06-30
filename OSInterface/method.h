@@ -42,12 +42,18 @@ typedef struct ariNode {
     char ope;
 } ariSen;
 
+typedef struct argNode {
+    char **argVar;
+    short count;
+} argNode;
+
 int showStr(char *);
 int showStrN(char *);
 int showPage(char ***);
 int showLabel(labelNode *);
 int showVar(varNode *);
 int showAri(ariSen *, short);
+int showArg(argNode);
 int decPow(int);
 int strToDig(char *);
 int ariVal(int, int, char);
@@ -72,6 +78,7 @@ bool ifIsGTR(char *);
 bool ifIsGEQ(char *);
 bool echoFile(char *, char *, bool);
 bool setVarVal(char *, char *, varNode *);
+char *argToStr(char *);
 char *digToStr(int);
 char *setArith(char *);
 char *getValue(char *, varNode *);
@@ -82,6 +89,7 @@ char *getFollow(char **, short);
 char *getSubStr(char **, short, short);
 char *getEchoPath(char **, short, short);
 char *getEchoValue(char **, short, short, short);
+char *getInp(bool);
 char **getBraStr(char **, short, short);
 char **strToTwoDem(char *);
 short ifIsOpe(char);
@@ -94,5 +102,6 @@ short *ifHavAnb(char **, short);
 labelNode *labelInfo(char ***);
 varNode *varInfo(char ***);
 ariSen getAriSen(bool);
+argNode setArgNod(int, char **);
 
 #endif /* method_h */

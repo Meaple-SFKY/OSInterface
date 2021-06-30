@@ -55,6 +55,14 @@
             argument = "/Users/sfky/Documents/Project/OSInterface/OSInterface/test"
             isEnabled = "YES">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "efgh"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "abcd"
+            isEnabled = "YES">
+         </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
    <ProfileAction

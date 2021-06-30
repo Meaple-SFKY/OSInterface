@@ -21,11 +21,6 @@ char ***fileToPage(int argc, char *argv[], char ***page) {
         buffer[i] = endChar;
     }
     
-    if(argc != 2) {
-        printf("Error format,Usage: display filename1\n");
-        return NULL;
-    }
-    
     if((fp = fopen(argv[1],"r")) == NULL) {
         printf("The file <%s> can not be opened.\n",argv[1]);
         return NULL;
