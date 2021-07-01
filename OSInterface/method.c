@@ -242,18 +242,44 @@ bool ifIsShift(char *str) {
     return ifShift;
 }
 
+bool ifIsEls(char *str) {
+    bool ifEls = false;
+    
+    // TODO
+    if (str != NULL) {
+        char *strElse = (char *)malloc(5 * charSize);
+        *strElse = 'e';
+        *(strElse + 1) = 'l';
+        *(strElse + 2) = 's';
+        *(strElse + 3) = 'e';
+        *(strElse + 4) = endChar;
+        
+        if (strCmp(strElse, str) == true) {
+            ifEls = true;
+        }
+    }
+    
+    return ifEls;
+}
+
 bool ifIsEQU(char *str) {
     bool ifEQU = false;
     
     // TODO
     if (str != NULL) {
         char *strEQU = (char *)malloc(4 * charSize);
+        char *chEqu = (char *)malloc(3 * charSize);
         *strEQU = 'E';
         *(strEQU + 1) = 'Q';
         *(strEQU + 2) = 'U';
         *(strEQU + 3) = endChar;
+        *chEqu = '=';
+        *(chEqu + 1) = '=';
+        *(chEqu + 2) = endChar;
         
         if (strCmp(strEQU, str) == true) {
+            ifEQU = true;
+        } else if (strCmp(chEqu, str) == true) {
             ifEQU = true;
         }
     }
@@ -367,6 +393,121 @@ bool ifIsDig(char ch) {
     return ifDig;
 }
 
+bool *ifJudTru(char *str, varNode *var, argNode arg) {
+    bool *ifJud = (bool *)malloc(2 * sizeof(bool));
+    *ifJud = false;
+    *(ifJud + 1) = false;
+    
+    // TODO
+    if (str != NULL) {
+        short len = getStrLen(str) - 1;
+        char **stack = (char **)malloc(2 * sizeof(char *));
+        bool flag = false;
+        short pos = 3;
+        
+        for (short i = 3; i < len - 4; i++) {
+            pos++;
+            if ((*(str + i) == (char)61) && (*(str + i + 1) == (char)61)) {
+                bool type_fir = (*str == (char)34) && (*(str + pos - 2) == (char)34);
+                bool type_sec = (*str == (char)37) && (*(str + pos - 2) == (char)37);
+                bool type_thi = (*(str + pos + 1) == (char)34) && (*(str + len - 1) == (char)34);
+                bool type_for = (*(str + pos + 1) == (char)37) && (*(str + len - 1) == (char)37);
+                if ((type_fir && type_thi) || (type_fir && type_for) || (type_sec && type_thi) || (type_sec && type_for)) {
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        
+        if (flag) {
+            char *tmp_fir = NULL;
+            char *tmp_sec = NULL;
+            short strLen = 0;
+            *ifJud = true;
+            *stack = (char *)malloc(pos * charSize);
+            *(stack + 1) = (char *)malloc((len - pos) * charSize);
+            *(*stack + pos - 1) = endChar;
+            *(*(stack + 1) + len - pos - 1) = endChar;
+            
+            for (short i = 0; i < pos - 1; i++) {
+                *(*stack + i) = *(str + i);
+            }
+            
+            for (short i = 0; i < len - pos - 1; i++) {
+                *(*(stack + 1) + i) = *(str + pos + i + 1);
+            }
+            
+            strLen = getStrLen(*stack) - 3;
+            tmp_fir = (char *)malloc((strLen + 1) * charSize);
+            *(tmp_fir + strLen) = endChar;
+            
+            for (short i = 0; i < strLen; i++) {
+                *(tmp_fir + i) = *(*stack + i + 1);
+            }
+            
+            if (**stack == (char)37) {
+                bool varType = true;
+                
+                for (short i = 0; i < strLen; i++) {
+                    if (!ifIsDig(*(tmp_fir + i))) {
+                        varType = false;
+                        break;
+                    }
+                }
+                
+                if (varType) {
+                    short pos = strToDig(tmp_fir);
+                    
+                    if (pos <= arg.count) {
+                        tmp_fir = *(arg.argVar + pos);
+                    } else {
+                        tmp_fir = *stack;
+                    }
+                } else {
+                    tmp_fir = getValue(tmp_fir, var);
+                }
+            }
+            
+            strLen = getStrLen(*(stack + 1)) - 3;
+            tmp_sec = (char *)malloc((strLen + 1) * charSize);
+            *(tmp_sec + strLen) = endChar;
+            
+            for (short i = 0; i < strLen; i++) {
+                *(tmp_sec + i) = *(*(stack + 1) + i + 1);
+            }
+            
+            if (**(stack + 1) == (char)37) {
+                bool varType = true;
+                
+                for (short i = 0; i < strLen; i++) {
+                    if (!ifIsDig(*(tmp_sec + i))) {
+                        varType = false;
+                        break;
+                    }
+                }
+                
+                if (varType) {
+                    short pos = strToDig(tmp_sec);
+                    
+                    if (pos <= arg.count) {
+                        tmp_sec = *(arg.argVar + pos);
+                    } else {
+                        tmp_sec = *(stack + 1);
+                    }
+                } else {
+                    tmp_sec = getValue(tmp_sec, var);
+                }
+            }
+            
+            if (strCmp(tmp_fir, tmp_sec)) {
+                *(ifJud + 1) = true;
+            }
+        }
+    }
+    
+    return ifJud;
+}
+
 short ifIsOpe(char ch) {
     short ifOpe = -1;
     
@@ -408,27 +549,30 @@ bool setVarVal(char *name, char *val, varNode *var) {
 }
 
 bool echoFile(char *path, char *str, bool mode) {
-    bool ifSuc = true;
+    bool ifSuc = false;
     
     // TODO
-    FILE *fp = NULL;
     
-    if (!mode) {
-        fp = fopen(path, "w");
-    } else {
-        fp = fopen(path, "a");
-    }
-    
-    if(fp == NULL) {
-        printf("The file <%s> can not be opened.\n", path);
-        ifSuc = false;
-    } else {
+    if (path != NULL) {
         
-        if (fputs(str, fp) == -1) {
-            printf("Echo Write Error!\n");
+        FILE *fp = NULL;
+        
+        if (!mode) {
+            fp = fopen(path, "w");
+        } else {
+            fp = fopen(path, "a");
         }
         
-        fclose(fp);
+        if(fp == NULL) {
+            printf("The file <%s> can not be opened.\n", path);
+        } else {
+            if (fputs(str, fp) == -1) {
+                printf("Echo Write Error!\n");
+            } else {
+                ifSuc = true;
+            }
+            fclose(fp);
+        }
     }
     
     return ifSuc;
@@ -564,7 +708,13 @@ char *getEchoPath(char **str, short anbPos, short info) {
     // TODO
     if (str != NULL) {
         if ((info == 0) || (info == 2)) {
-            pathStr = getStr(*(str + anbPos + 1));
+            short len = getStrLen(*(str + anbPos + 1)) - 1;
+            pathStr = (char *)malloc((len + 1) * charSize);
+            
+            for (short i = 0; i < len; i++) {
+                *(pathStr + i) = *(*(str + anbPos + 1) + i);
+            }
+            *(pathStr + len) = '\0';
         }
     }
     
@@ -589,6 +739,149 @@ char *getVarNam(char *str) {
     }
     
     return varNam;
+}
+
+char *getAriStr(char *ariStr, varNode *var, argNode arg) {
+    char *str = NULL;
+    
+    // TODO
+    if (ariStr != NULL) {
+        short len = getStrLen(ariStr) - 1;
+        short strLen = 0;
+        
+        for (short i = 0; i < len; i++) {
+            if ((*(ariStr + i) == (char)37) && (i < len - 2)) {
+                short subLen = 0;
+                bool flag = true;
+                char *subStr = NULL;
+                
+                for (short j = 1; i + j < len; j++) {
+                    if (*(ariStr + i + j) == (char)37) {
+                        break;
+                    }
+                    subLen++;
+                }
+                
+                if ((subLen > 0) && (i + subLen < len - 1)) {
+                    subStr = (char *)malloc((subLen + 1) * charSize);
+                    *(subStr + subLen) = endChar;
+                    
+                    for (short j = 0; j < subLen; j++) {
+                        *(subStr + j) =*(ariStr + i + j + 1);
+                        
+                        if (!ifIsDig(*(subStr + j))) {
+                            flag = false;
+                        }
+                    }
+                    
+                    if (flag) {
+                        int argNam = strToDig(subStr);
+                        subStr = *(arg.argVar + argNam);
+                        
+                        if (subStr != NULL) {
+                            strLen += getStrLen(subStr) - 1;
+                        }
+                    } else {
+                        subStr = getValue(subStr, var);
+                        
+                        if (subStr != NULL) {
+                            strLen += getStrLen(subStr) - 1;
+                        }
+                    }
+                } else {
+                    strLen++;
+                }
+                
+                i += subLen + 2;
+                if (i - 1 < len - 1) {
+                    strLen++;
+                }
+            } else {
+                strLen++;
+            }
+        }
+        str = (char *)malloc((strLen + 1) * charSize);
+        *(str + strLen) = endChar;
+        strLen = 0;
+        
+        for (short i = 0; i < len; i++) {
+            if ((*(ariStr + i) == (char)37) && (i < len - 2)) {
+                short subLen = 0;
+                bool flag = true;
+                char *subStr = NULL;
+                
+                for (short j = 1; i + j < len; j++) {
+                    if (*(ariStr + i + j) == (char)37) {
+                        break;
+                    }
+                    subLen++;
+                }
+                
+                if (subLen > 0 && (i + subLen < len - 1)) {
+                    subStr = (char *)malloc((subLen + 1) * charSize);
+                    *(subStr + subLen) = endChar;
+                    
+                    for (short j = 0; j < subLen; j++) {
+                        *(subStr + j) =*(ariStr + i + j + 1);
+                        
+                        if (!ifIsDig(*(subStr + j))) {
+                            flag = false;
+                        }
+                    }
+                    
+                    if (flag) {
+                        int argNam = strToDig(subStr);
+                        subStr = *(arg.argVar + argNam);
+                        
+                        if ((subStr != NULL) && (*subStr != endChar)) {
+                            short temLen = getStrLen(subStr) - 1;
+                            
+                            for (short p = 0; p < temLen; p++) {
+                                *(str + strLen) = *(subStr + p);
+                                strLen++;
+                            }
+                        } else {
+                            short temLen = getStrLen(ariStr);
+                            
+                            for (short p = 0; p < temLen; p++) {
+                                *(str + strLen) = *(ariStr + i + p);
+                                strLen++;
+                            }
+                        }
+                    } else {
+                        subStr = getValue(subStr, var);
+                        
+                        
+                        if ((subStr != NULL) && (*subStr != endChar)) {
+                            short temLen = getStrLen(subStr) - 1;
+                            
+                            for (short p = 0; p < temLen; p++) {
+                                *(str + strLen) = *(subStr + p);
+                                strLen++;
+                            }
+                        } else {
+                            short temLen = getStrLen(ariStr);
+                            
+                            for (short p = 0; p < temLen; p++) {
+                                *(str + strLen) = *(ariStr + i + p);
+                                strLen++;
+                            }
+                        }
+                    }
+                }
+                i += subLen + 2;
+                if (i - 1 < len - 1) {
+                    *(str + strLen) = *(ariStr + i);
+                    strLen++;
+                }
+            } else {
+                *(str + strLen) = *(ariStr + i);
+                strLen++;
+            }
+        }
+    }
+    
+    return str;
 }
 
 char *getVarVal(char *str) {
@@ -701,7 +994,6 @@ char *setArith(char *str) {
                     
                     for (short j = i; j < len; j++) {
                         if (!ifIsDig(*(str + j))) {
-                            i = j - 1;
                             break;
                         }
                         digLen++;
@@ -836,27 +1128,6 @@ char *setArith(char *str) {
     return ariCount;
 }
 
-char *argToStr(char *argv) {
-    char *str = NULL;
-    
-    // TODO
-    if (argv != NULL) {
-        short len = 0;
-        
-        for (short i = 0; *(argv + i) != (char)0; i++) {
-            len++;
-        }
-        str = (char *)malloc((len + 1) * charSize);
-        
-        for (short i = 0; i < len; i++) {
-            *(str + i) = *(argv + i);
-        }
-        *(str + len) = endChar;
-    }
-    
-    return str;
-}
-
 char *getInp(bool ifInp) {
     char *str = NULL;
     
@@ -890,12 +1161,24 @@ char *getEchoValue(char **str, short pos, short anbPos, short info) {
     // TODO
     if (str != NULL) {
         if ((info == 0) || (info == 2)) {
-            echoValue = getStr(getSubStr(str, pos, anbPos));
+            char *temStr = getSubStr(str, pos, anbPos);
+            short len = getStrLen(temStr) - 1;
+            
+            echoValue = (char *)malloc((len + 1) * charSize);
+            
+            for (short i = 0; i < len; i++) {
+                *(echoValue + i) = *(temStr + i);
+            }
+            *(echoValue + len) = '\0';
         }
     }
     
     return echoValue;
 }
+
+//char ***filePage(char ***file, char **str) {
+//    if ()
+//}
 
 int decPow(int powNum) {
     int dig = overFlow;
@@ -983,13 +1266,50 @@ short ifIsSla(char *str) {
     short ifSla = -1;
     
     // TODO
-    if ((str != NULL) && (getStrLen(str) == 3)) {
-        if ((*str == (char)47) && (*(str + 2) == endChar)) {
-            if (*(str + 1) == 'a') {
-                ifSla = 0;
-            } else if (*(str + 1) == 'p') {
-                ifSla = 1;
+    if ((str != NULL) && (getStrLen(str) == 3) && (*str == (char)47)) {
+        if (*(str + 1) == 'a') {
+            ifSla = 0;
+        } else if (*(str + 1) == 'p') {
+            ifSla = 1;
+        }
+    }
+    
+    return ifSla;
+}
+
+short ifForSla(char *str) {
+    short ifSla = -1;
+    
+    // TODO
+    if ((str != NULL) && (getStrLen(str) == 3) && (*str == (char)47)) {
+        if (*(str + 1) == 'd') {
+            ifSla = 0;
+        } else if (*(str + 1) == 'r') {
+            ifSla = 1;
+        } else if (*(str + 1) == 'l') {
+            ifSla = 2;
+        } else if (*(str + 1) == 'f') {
+            ifSla = 3;
+        }
+    }
+    
+    return ifSla;
+}
+
+short ifShiSla(char *str) {
+    short ifSla = 0;
+    
+    // TODO
+    if ((str != NULL) && (*str == (char)47)) {
+        short len = getStrLen(str);
+        
+        if (len > 1) {
+            char *digStr = (char *)malloc((len - 1) * charSize);
+            
+            for (short i = 1; i < len; i++) {
+                *(digStr + i - 1) = *(str + i);
             }
+            ifSla = strToDig(digStr);
         }
     }
     
@@ -1402,6 +1722,28 @@ argNode setArgNod(int argc, char **argv) {
     return node;
 }
 
+argNode shiftArg(argNode arg, short pos) {
+    argNode tempArg = arg;
+    
+    // TODO
+    if ((arg.count > 0) && (pos <= arg.count)) {
+        for (short i = pos - 1; i < arg.count - 1; i++) {
+            short len = getStrLen(*(arg.argVar + i + 1));
+            *(tempArg.argVar + i) = (char *)realloc(*(arg.argVar + i), len * charSize);
+            
+            for (short j = 0; j < len; j++) {
+                *(*(tempArg.argVar + i) + j) = *(*(arg.argVar + i + 1) + j);
+            }
+        }
+        tempArg.count--;
+    } else {
+        tempArg.count = 0;
+    }
+    
+    return tempArg;
+}
+
+
 char *getValue(char *label, varNode *var) {
     char *value = NULL;
     
@@ -1430,7 +1772,7 @@ int showStr(char *str) {
     } else {
         suc = 1;
     }
-        
+    
     return suc;
 }
 
@@ -1442,7 +1784,7 @@ int showStrN(char *str) {
         for (short i = 0; i < len; i++) {
             putchar(*(str + i));
         }
-        putchar('\n');
+        putchar(10);
     } else {
         suc = 1;
     }
@@ -1450,86 +1792,31 @@ int showStrN(char *str) {
     return suc;
 }
 
-
-int showPage(char ***page) {
-    
-    if (page == NULL) {
-        return 1;
-    }
-    
-    for (short i = 0; i < pageLength; i++) {
-        for (short j = 0; *(*(*(page + i) + j)) != endChar; j++) {
-            showStrN(*(*(page + i) + j));
-        }
-    }
-    
-    return 0;
-}
-
-int showLabel(labelNode *label) {
-    
-    if (label == NULL) {
-        return 1;
-    }
-    
-    for (short i = 0; i < labelCount; i++) {
-        printf("%hd -- ", (*(label + i)).locat);
-        showStrN((*(label + i)).label);
-    }
-    
-    return 0;
-}
-
-int showVar(varNode *var) {
+int showVar(varNode *var, argNode arg) {
     int suc = 0;
     
     if (var != NULL) {
         for (short i = 0; i < varCount; i++) {
-            printf("%hd -- %hd -- %hd -- ", (*(var + i)).rowIndex, (*(var + i)).colIndex, (*(var + i)).varType);
             showStr((*(var + i)).label);
-            printf(" -- ");
+            putchar(32);
+            
             if (*(*(var + i)).value != endChar) {
                 showStrN((*(var + i)).value);
             } else {
-                printf("none\n");
+                putchar(10);
             }
         }
     } else {
         suc = 1;
     }
-    
-    return suc;
-}
-
-int showAri(ariSen *ari, short size) {
-    int suc = 0;
-    
-    // TODO
-    if (ari != NULL) {
-        printf("Size: %d ---: ", size);
-        for (short i = 0; i < size; i++) {
-            if ((*(ari + i)).ariType) {
-                printf("%d", (*(ari + i)).data);
-            } else {
-                printf("%c", (*(ari + i)).ope);
-            }
-        }
-        printf("\n");
-    } else {
-        suc = 1;
-    }
-    
-    return suc;
-}
-
-int showArg(argNode arg) {
-    int suc = 0;
     
     if (arg.count > 0) {
-        printf("%hd\n", arg.count);
+        showStr(digToStr(arg.count));
         for (short i = 0; i < arg.count; i++) {
-            showStrN(*(arg.argVar + i));
+            putchar(32);
+            showStr(*(arg.argVar + i));
         }
+        putchar(10);
     } else {
         suc = 1;
     }

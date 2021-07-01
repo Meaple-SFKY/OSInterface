@@ -8,6 +8,7 @@
 #ifndef method_h
 #define method_h
 
+#include "file_in.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -47,13 +48,14 @@ typedef struct argNode {
     short count;
 } argNode;
 
+typedef struct ifInfo {
+    short pos;
+    bool errInfo;
+} ifInfo;
+
 int showStr(char *);
 int showStrN(char *);
-int showPage(char ***);
-int showLabel(labelNode *);
-int showVar(varNode *);
-int showAri(ariSen *, short);
-int showArg(argNode);
+int showVar(varNode *, argNode);
 int decPow(int);
 int strToDig(char *);
 int ariVal(int, int, char);
@@ -70,15 +72,16 @@ bool ifIsGoto(char *);
 bool ifIsIf(char *);
 bool ifIsSet(char *);
 bool ifIsShift(char *);
+bool ifIsEls(char *);
 bool ifIsEQU(char *);
 bool ifIsNEQ(char *);
 bool ifIsLSS(char *);
 bool ifIsLEQ(char *);
 bool ifIsGTR(char *);
 bool ifIsGEQ(char *);
+bool *ifJudTru(char *, varNode *, argNode);
 bool echoFile(char *, char *, bool);
 bool setVarVal(char *, char *, varNode *);
-char *argToStr(char *);
 char *digToStr(int);
 char *setArith(char *);
 char *getValue(char *, varNode *);
@@ -90,11 +93,14 @@ char *getSubStr(char **, short, short);
 char *getEchoPath(char **, short, short);
 char *getEchoValue(char **, short, short, short);
 char *getInp(bool);
+char *getAriStr(char *, varNode *, argNode);
 char **getBraStr(char **, short, short);
 char **strToTwoDem(char *);
 short ifIsOpe(char);
 short ifHavEqo(char *);
 short ifIsSla(char *);
+short ifShiSla(char *);
+short ifForSla(char *);
 short getStrLen(char *);
 short getDouStrLen(char **);
 short getVarCou(char **, short);
@@ -103,5 +109,6 @@ labelNode *labelInfo(char ***);
 varNode *varInfo(char ***);
 ariSen getAriSen(bool);
 argNode setArgNod(int, char **);
+argNode shiftArg(argNode, short);
 
 #endif /* method_h */

@@ -1,13 +1,18 @@
 echo hello issn
-echo %asada% > adfg
+echo %asada% 2 > adfg
 goto label
 set asada=10
 :label
-set saaafff=10
+shift /1
+set saaafff=abcd
 set asada=9
-echo x: %asada%
-set /a asa=2*(3+1)
-set asada=9
-echo %asada% > adfg
+echo x: %asada%+%saaafff%
+set /a asa=8+9
+set add=9
+if %saaafff%==%2% (set asada=1) else (set asada=3)
+set /a c=%asa%%%asada%
+echo %1% >> adfg
+echo %asada% adfg
 set /p a=Please input val of a:
 set
+echo nihao

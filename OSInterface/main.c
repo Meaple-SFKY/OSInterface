@@ -22,10 +22,6 @@ int main(int argc, char * argv[]) {
         argNode arg = setArgNod(argc, argv);
         process(page, label, arg, var, 0);
         
-//        if (showArg(arg) != 0) {
-//            printf("arg error\n");
-//        }
-        
     } else {
         printf("Error format,Usage: display filename1\n");
         reMain = 1;

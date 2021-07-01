@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		96147D0A2685797E00FBA873 /* method.c in Sources */ = {isa = PBXBuildFile; fileRef = 96147D092685797E00FBA873 /* method.c */; };
+		965899F5268E46A40048BD48 /* file_in.c in Sources */ = {isa = PBXBuildFile; fileRef = 965899F4268E46A40048BD48 /* file_in.c */; };
 		96C7C1132688244400BABDB8 /* process.c in Sources */ = {isa = PBXBuildFile; fileRef = 96C7C1122688244400BABDB8 /* process.c */; };
-		96D52C12268381AC00481260 /* file_in.c in Sources */ = {isa = PBXBuildFile; fileRef = 96D52C11268381AC00481260 /* file_in.c */; };
 		96D52C132683843B00481260 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 96C46135267AFE1C00E02A9A /* main.c */; };
 /* End PBXBuildFile section */
 
@@ -29,12 +29,12 @@
 		96147D082685797E00FBA873 /* method.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = method.h; sourceTree = "<group>"; };
 		96147D092685797E00FBA873 /* method.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = method.c; sourceTree = "<group>"; };
 		962F003D2685F23E0020843F /* test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = test; sourceTree = "<group>"; };
+		965899F3268E469A0048BD48 /* file_in.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_in.h; sourceTree = "<group>"; };
+		965899F4268E46A40048BD48 /* file_in.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = file_in.c; sourceTree = "<group>"; };
 		96C46132267AFE1C00E02A9A /* OSInterface */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OSInterface; sourceTree = BUILT_PRODUCTS_DIR; };
 		96C46135267AFE1C00E02A9A /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = main.c; sourceTree = "<group>"; };
 		96C7C1112688244400BABDB8 /* process.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = process.h; sourceTree = "<group>"; };
 		96C7C1122688244400BABDB8 /* process.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = process.c; sourceTree = "<group>"; };
-		96D52C10268381AC00481260 /* file_in.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = file_in.h; sourceTree = "<group>"; };
-		96D52C11268381AC00481260 /* file_in.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = file_in.c; sourceTree = "<group>"; };
 		96D52C14268389BF00481260 /* new.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = new.bat; sourceTree = "<group>"; usesTabs = 0; };
 		96D63ED6268447D000DEC695 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,8 +70,8 @@
 		96C46134267AFE1C00E02A9A /* OSInterface */ = {
 			isa = PBXGroup;
 			children = (
-				96D52C11268381AC00481260 /* file_in.c */,
-				96D52C10268381AC00481260 /* file_in.h */,
+				965899F3268E469A0048BD48 /* file_in.h */,
+				965899F4268E46A40048BD48 /* file_in.c */,
 				96C46135267AFE1C00E02A9A /* main.c */,
 				96147D092685797E00FBA873 /* method.c */,
 				96147D082685797E00FBA873 /* method.h */,
@@ -139,10 +139,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				965899F5268E46A40048BD48 /* file_in.c in Sources */,
 				96D52C132683843B00481260 /* main.c in Sources */,
 				96147D0A2685797E00FBA873 /* method.c in Sources */,
 				96C7C1132688244400BABDB8 /* process.c in Sources */,
-				96D52C12268381AC00481260 /* file_in.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
