@@ -22,12 +22,11 @@ int main(int argc, char * argv[]) {
         argNode arg = setArgNod(argc, argv);
         showStrN(*arg.argVar);
         process(page, label, arg, var, 0);
-        showStrN(*arg.argVar);
         
     } else {
         printf("Error format,Usage: display filename1\n");
         reMain = 1;
     }
     
-    return 0;
+    return reMain;
 }
