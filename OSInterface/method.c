@@ -548,36 +548,6 @@ bool setVarVal(char *name, char *val, varNode *var) {
     return suc;
 }
 
-bool echoFile(char *path, char *str, bool mode) {
-    bool ifSuc = false;
-    
-    // TODO
-    
-    if (path != NULL) {
-        
-        FILE *fp = NULL;
-        
-        if (!mode) {
-            fp = fopen(path, "w");
-        } else {
-            fp = fopen(path, "a");
-        }
-        
-        if(fp == NULL) {
-            printf("The file <%s> can not be opened.\n", path);
-        } else {
-            if (fputs(str, fp) == -1) {
-                printf("Echo Write Error!\n");
-            } else {
-                ifSuc = true;
-            }
-            fclose(fp);
-        }
-    }
-    
-    return ifSuc;
-}
-
 char **getBraStr(char **str, short startPos, short endPos) {
     char **buffer = NULL;
     
@@ -776,15 +746,17 @@ char *getAriStr(char *ariStr, varNode *var, argNode arg) {
                     
                     if (flag) {
                         int argNam = strToDig(subStr);
-                        subStr = *(arg.argVar + argNam);
                         
-                        if (subStr != NULL) {
+                        if (argNam <= arg.count) {
+                            subStr = *(arg.argVar + argNam - 1);
                             strLen += getStrLen(subStr) - 1;
+                        } else {
+                            strLen += getStrLen(ariStr);
                         }
                     } else {
                         subStr = getValue(subStr, var);
                         
-                        if (subStr != NULL) {
+                        if ((subStr != NULL) && (*subStr != endChar)) {
                             strLen += getStrLen(subStr) - 1;
                         }
                     }
@@ -831,9 +803,9 @@ char *getAriStr(char *ariStr, varNode *var, argNode arg) {
                     
                     if (flag) {
                         int argNam = strToDig(subStr);
-                        subStr = *(arg.argVar + argNam);
                         
-                        if ((subStr != NULL) && (*subStr != endChar)) {
+                        if (argNam <= arg.count) {
+                            subStr = *(arg.argVar + argNam - 1);
                             short temLen = getStrLen(subStr) - 1;
                             
                             for (short p = 0; p < temLen; p++) {
@@ -841,7 +813,7 @@ char *getAriStr(char *ariStr, varNode *var, argNode arg) {
                                 strLen++;
                             }
                         } else {
-                            short temLen = getStrLen(ariStr);
+                            short temLen = getStrLen(ariStr) - 1;
                             
                             for (short p = 0; p < temLen; p++) {
                                 *(str + strLen) = *(ariStr + i + p);
@@ -850,7 +822,6 @@ char *getAriStr(char *ariStr, varNode *var, argNode arg) {
                         }
                     } else {
                         subStr = getValue(subStr, var);
-                        
                         
                         if ((subStr != NULL) && (*subStr != endChar)) {
                             short temLen = getStrLen(subStr) - 1;
@@ -1042,7 +1013,6 @@ char *setArith(char *str) {
                                     ariTemp -= 2;
                                     totCou -= 2;
                                 } else {
-                                    printf("Error 1: String Illegal\n");
                                     gloFla = false;
                                     break;
                                 }
@@ -1055,13 +1025,11 @@ char *setArith(char *str) {
                                 ariTemp -= 3;
                                 totCou -= 2;
                             } else {
-                                printf("Error 2: String Illegal\n");
                                 gloFla = false;
                                 break;
                             }
                         }
                     } else if ((ariTemp == totCou - 1) && (ariTemp > 1) && ((*(ari + ariTemp - 2)).ariType == false) && ((*(ari + ariTemp - 1)).ariType == false)) {
-                        printf("Error 3: String Illegal\n");
                         gloFla = false;
                         break;
                     }
@@ -1095,17 +1063,14 @@ char *setArith(char *str) {
                                     ariTemp -= 4;
                                     totCou -= 4;
                                 } else {
-                                    printf("Error 4: String Illegal\n");
                                     gloFla = false;
                                     break;
                                 }
                             } else {
-                                printf("Error 5: String Illegal\n");
                                 gloFla = false;
                                 break;
                             }
                         } else {
-                            printf("Error 6: String Illegal\n");
                             gloFla = false;
                             break;
                         }
@@ -1117,11 +1082,11 @@ char *setArith(char *str) {
             if (gloFla) {
                 ariCount = digToStr((*ari).data);
             } else {
-                printf("Error: String Illegal\n");
+                gloFla = false;
             }
             
         } else {
-            printf("Error 7: String Illegal\n");
+            gloFla = false;
         }
     }
     
@@ -1758,68 +1723,4 @@ char *getValue(char *label, varNode *var) {
     }
     
     return value;
-}
-
-int showStr(char *str) {
-    int suc = 0;
-    
-    if (str != NULL) {
-        short len = getStrLen(str) - 1;
-        
-        for (short i = 0; i < len; i++) {
-            putchar(*(str + i));
-        }
-    } else {
-        suc = 1;
-    }
-    
-    return suc;
-}
-
-int showStrN(char *str) {
-    int suc = 0;
-    
-    if (str != NULL) {
-        short len = getStrLen(str) - 1;
-        for (short i = 0; i < len; i++) {
-            putchar(*(str + i));
-        }
-        putchar(10);
-    } else {
-        suc = 1;
-    }
-        
-    return suc;
-}
-
-int showVar(varNode *var, argNode arg) {
-    int suc = 0;
-    
-    if (var != NULL) {
-        for (short i = 0; i < varCount; i++) {
-            showStr((*(var + i)).label);
-            putchar(32);
-            
-            if (*(*(var + i)).value != endChar) {
-                showStrN((*(var + i)).value);
-            } else {
-                putchar(10);
-            }
-        }
-    } else {
-        suc = 1;
-    }
-    
-    if (arg.count > 0) {
-        showStr(digToStr(arg.count));
-        for (short i = 0; i < arg.count; i++) {
-            putchar(32);
-            showStr(*(arg.argVar + i));
-        }
-        putchar(10);
-    } else {
-        suc = 1;
-    }
-    
-    return suc;
 }

@@ -9,7 +9,6 @@
 #define method_h
 
 #include "file_in.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 #define bool char
@@ -53,9 +52,6 @@ typedef struct ifInfo {
     bool errInfo;
 } ifInfo;
 
-int showStr(char *);
-int showStrN(char *);
-int showVar(varNode *, argNode);
 int decPow(int);
 int strToDig(char *);
 int ariVal(int, int, char);
@@ -80,7 +76,6 @@ bool ifIsLEQ(char *);
 bool ifIsGTR(char *);
 bool ifIsGEQ(char *);
 bool *ifJudTru(char *, varNode *, argNode);
-bool echoFile(char *, char *, bool);
 bool setVarVal(char *, char *, varNode *);
 char *digToStr(int);
 char *setArith(char *);
