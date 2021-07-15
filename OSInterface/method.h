@@ -9,6 +9,7 @@
 #define method_h
 
 #include "file_in.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 #define bool char

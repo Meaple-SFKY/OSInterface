@@ -8,9 +8,8 @@
 #ifndef file_in_h
 #define file_in_h
 
-#include <stdio.h>
 #include "method.h"
 
-char ***fileToPage(int, char **, char ***);
+char ***fileToPage(int, char **);
 
 #endif /* file_in_h */

@@ -1763,13 +1763,10 @@ int showVar(varNode *var, argNode arg) {
     
     if (var != NULL) {
         for (short i = 0; i < varCount; i++) {
-            showStr((*(var + i)).label);
-            putchar(32);
-            
             if (*(*(var + i)).value != endChar) {
+                showStr((*(var + i)).label);
+                putchar(32);
                 showStrN((*(var + i)).value);
-            } else {
-                putchar(10);
             }
         }
     } else {

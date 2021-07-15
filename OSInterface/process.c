@@ -123,13 +123,15 @@ short processGoto(char **word, short row, short pos, labelNode *label) {
     short gotoPos = row + 1;
     
     // TODO
-    if (word != NULL) {
-        bool flag = false;
-        for (short i = 0; i < labelCount; i++) {
-            if(strCmp(*(word + pos), (*(label + i)).label)) {
-                gotoPos = (*(label + i)).locat + 1;
-                flag = true;
-                break;
+    if ((word != NULL) && (pos == 1)) {
+        short douLen = getDouStrLen(word);
+        
+        if (douLen > 2) {
+            for (short i = 0; i < labelCount; i++) {
+                if(strCmp(*(word + pos), (*(label + i)).label)) {
+                    gotoPos = (*(label + i)).locat + 1;
+                    break;
+                }
             }
         }
     }
@@ -243,7 +245,7 @@ argNode processShift(char **word, short pos, argNode arg) {
             tempArg = shiftArg(arg, 1);
         } else {
             short argPos =ifShiSla(*(word + pos));
-            if (argPos != 0) {
+            if ((argPos > 0) && (argPos <= arg.count )) {
                 tempArg = shiftArg(arg, argPos);
                 showStrN(*arg.argVar);
             }
@@ -305,7 +307,7 @@ ifInfo processIf(char **word, short row, short pos, argNode arg, varNode *var, l
 
                             for (short i = 1; i < douLen; i++) {
                                 short subLen = getStrLen(*(word + nowPos + i));
-                                if (*(*(word + nowPos + i) + subLen - 2) == (char)41) {
+                                if ((subLen > 1) && (*(*(word + nowPos + i) + subLen - 2) == (char)41)) {
                                     ifAnaBra = i;
                                     break;
                                 }

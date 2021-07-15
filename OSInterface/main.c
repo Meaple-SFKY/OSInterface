@@ -15,12 +15,11 @@ int main(int argc, char * argv[]) {
     // insert code here...
     if (argc > 1) {
         char ***page = NULL;
-        page = fileToPage(argc, argv, page);
-
+        page = fileToPage(argc, argv);
+        
         labelNode *label = labelInfo(page);
         varNode *var = varInfo(page);
         argNode arg = setArgNod(argc, argv);
-        showStrN(*arg.argVar);
         process(page, label, arg, var, 0);
         
     } else {

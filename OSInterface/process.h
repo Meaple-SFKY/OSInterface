@@ -8,7 +8,6 @@
 #ifndef process_h
 #define process_h
 
-#include <stdio.h>
 #include "method.h"
 
 bool processEcho(char **, short, argNode, varNode*);

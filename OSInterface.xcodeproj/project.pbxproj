@@ -28,7 +28,7 @@
 /* Begin PBXFileReference section */
 		96147D082685797E00FBA873 /* method.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = method.h; sourceTree = "<group>"; };
 		96147D092685797E00FBA873 /* method.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = method.c; sourceTree = "<group>"; };
-		962F003D2685F23E0020843F /* test.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = test.bat; sourceTree = "<group>"; };
+		962F003D2685F23E0020843F /* test.batch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = test.batch; sourceTree = "<group>"; };
 		96447E57268EA70800601459 /* Script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Script.sh; sourceTree = "<group>"; };
 		965899F3268E469A0048BD48 /* file_in.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_in.h; sourceTree = "<group>"; };
 		965899F4268E46A40048BD48 /* file_in.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = file_in.c; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 				96147D082685797E00FBA873 /* method.h */,
 				96C7C1122688244400BABDB8 /* process.c */,
 				96C7C1112688244400BABDB8 /* process.h */,
-				962F003D2685F23E0020843F /* test.bat */,
+				962F003D2685F23E0020843F /* test.batch */,
 				96447E57268EA70800601459 /* Script.sh */,
 			);
 			path = OSInterface;
