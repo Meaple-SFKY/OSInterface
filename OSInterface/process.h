@@ -19,9 +19,4 @@ ifInfo processIf(char **, short, short, argNode, varNode*, labelNode *);
 argNode processShift(char **, short, argNode);
 int process(char ***, labelNode *, argNode, varNode*, short);
 
-bool echoFile(char *, char *, bool);
-int showStr(char *);
-int showStrN(char *);
-int showVar(varNode *, argNode);
-
 #endif /* process_h */
